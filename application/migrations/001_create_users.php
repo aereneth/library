@@ -27,6 +27,7 @@ class Migration_Create_users extends CI_Migration {
             'email_address' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '255',
+                'unique' => TRUE,
             ),
             'contact_number' => array(
                 'type' => 'VARCHAR',
@@ -43,6 +44,16 @@ class Migration_Create_users extends CI_Migration {
         ));
         $this->dbforge->add_key('id', TRUE);
         $this->dbforge->create_table('users', TRUE);
+
+        $this->db->insert('users', array(
+            'first_name' => 'admin',
+            'last_name' => 'admin',
+            'middle_name' => 'admin',
+            'email_address' => 'admin@gmail.com',
+            'contact_number' => '00000000000',
+            'address' => 'none',
+            'password' => password_hash('password', PASSWORD_BCRYPT),
+        ));
     }
 
     public function down()
