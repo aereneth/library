@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Migration_Create_borrows extends CI_Migration {
+class Migration_Create_reservations extends CI_Migration {
 
     public function up()
     {
@@ -22,7 +22,7 @@ class Migration_Create_borrows extends CI_Migration {
                 'constraint' => 5,
                 'unsigned' => TRUE,
             ),
-            'borrow_date' => array(
+            'reservation_date' => array(
                 'type' => 'DATETIME',
             ),
             'due_date' => array(
@@ -32,7 +32,7 @@ class Migration_Create_borrows extends CI_Migration {
                 'type' => 'DATETIME',
                 'null' => TRUE
             ),
-            'borrowed_days' => array(
+            'reservation_days' => array(
                 'type' => 'int',
                 'constraint' => 5,
                 'default' => 0,
@@ -51,13 +51,15 @@ class Migration_Create_borrows extends CI_Migration {
                 'constraint' => '255',
                 'null' => TRUE
             ),
+            'CONSTRAINT fk_reservations_book FOREIGN KEY (book_id) REFERENCES books(id)',
+            'CONSTRAINT fk_reservations_user FOREIGN KEY (user_id) REFERENCES users(id)',
         ));
         $this->dbforge->add_key('id', TRUE);
-        $this->dbforge->create_table('borrows', TRUE);
+        $this->dbforge->create_table('reservations', TRUE);
     }
 
     public function down()
     {
-        $this->dbforge->drop_table('borrows');
+        $this->dbforge->drop_table('reservations');
     }
 }

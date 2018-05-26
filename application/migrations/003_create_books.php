@@ -26,6 +26,11 @@ class Migration_Create_books extends CI_Migration {
                 'constraint' => '255',
                 'null' => TRUE,
             ),
+            'category_id' => array(
+                'type' => 'INT',
+                'constraint' => 5,
+                'unsigned' => TRUE,
+            ),
             'publisher' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '255',
@@ -43,14 +48,13 @@ class Migration_Create_books extends CI_Migration {
             'description' => array(
                 'type' => 'TEXT',
             ),
-            'abstract' => array(
-                'type' => 'TEXT',
-                'null' => TRUE,
-            ),
             'status' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '255',
             ),
+            'acquisition_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
+            'recent_update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
+            'CONSTRAINT fk_books_category FOREIGN KEY (category_id) REFERENCES categories(id)',
         ));
         $this->dbforge->add_key('id', TRUE);
         $this->dbforge->create_table('books', TRUE);
