@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col s6 offset-s3">
                 <div class="card">
-                    <form action="/login" method="post">
+                    <form action="<?= base_url('/login') ?>" method="post">
                         <div class="card-content">
                             <div class="row">
                                 <div class="col s12">
