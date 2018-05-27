@@ -13,12 +13,12 @@
                                 </div>
                                 <div class="input-field col s12">
                                     <div class="material-icons prefix">account_circle</div>
-                                    <input id="emailField" type="email" class="validate" name="email">
+                                    <input id="emailField" type="email" class="validate" name="email" required>
                                     <label for="emailField">Email Address</label>
                                 </div>
                                 <div class="input-field col s12">
                                     <div class="material-icons prefix">lock</div>
-                                    <input id="passwordField" type="password" class="validate" name="password">
+                                    <input id="passwordField" type="password" class="validate" name="password" required>
                                     <label for="passwordField">Password</label>
                                 </div>
                                 <div class="col s12">

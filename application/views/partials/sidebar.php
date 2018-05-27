@@ -25,7 +25,7 @@
         </div>
     </li>
     <li><a class="subheader">Library</a></li>
-    <li><a href="#!" class="waves-effect"><i class="material-icons">add_box</i>Acquisition</a></li>
+    <li><a href="<?= base_url('acquisition') ?>" class="waves-effect"><i class="material-icons">add_box</i>Acquisition</a></li>
     <li><a href="#!" class="waves-effect"><i class="material-icons">autorenew</i>Circulation</a></li>
     <li><a href="#!" class="waves-effect"><i class="material-icons">create</i>Inventory</a></li>
     <li><div class="divider"></div></li>
