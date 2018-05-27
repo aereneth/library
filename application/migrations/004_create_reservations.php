@@ -23,13 +23,13 @@ class Migration_Create_reservations extends CI_Migration {
                 'unsigned' => TRUE,
             ),
             'reservation_date' => array(
-                'type' => 'DATETIME',
+                'type' => 'TIMESTAMP',
             ),
             'due_date' => array(
-                'type' => 'DATETIME',
+                'type' => 'TIMESTAMP',
             ),
             'return_date' => array(
-                'type' => 'DATETIME',
+                'type' => 'TIMESTAMP',
                 'null' => TRUE
             ),
             'reservation_days' => array(
@@ -50,6 +50,10 @@ class Migration_Create_reservations extends CI_Migration {
                 'type' => 'VARCHAR',
                 'constraint' => '255',
                 'null' => TRUE
+            ),
+            'deleted' => array(
+                'type' => 'BOOLEAN',
+                'default' => FALSE,
             ),
             'CONSTRAINT fk_reservations_book FOREIGN KEY (book_id) REFERENCES books(id)',
             'CONSTRAINT fk_reservations_user FOREIGN KEY (user_id) REFERENCES users(id)',

@@ -31,6 +31,14 @@ class Migration_Create_books extends CI_Migration {
                 'constraint' => 5,
                 'unsigned' => TRUE,
             ),
+            'author' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+            ),
+            'other_author' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+            ),
             'publisher' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '255',
@@ -40,7 +48,7 @@ class Migration_Create_books extends CI_Migration {
                 'constraint' => '4',
                 'null' => TRUE,
             ),
-            'editon' => array(
+            'edition' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '255',
                 'null' => TRUE,
@@ -51,6 +59,11 @@ class Migration_Create_books extends CI_Migration {
             'status' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '255',
+                'null' => TRUE
+            ),
+            'deleted' => array(
+                'type' => 'BOOLEAN',
+                'default' => FALSE,
             ),
             'acquisition_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
             'recent_update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
