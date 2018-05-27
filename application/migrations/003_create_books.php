@@ -63,7 +63,7 @@ class Migration_Create_books extends CI_Migration {
             ),
             'deleted' => array(
                 'type' => 'BOOLEAN',
-                'default' => 0,
+                'default' => FALSE,
             ),
             'acquisition_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
             'recent_update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
