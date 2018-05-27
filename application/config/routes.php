@@ -63,4 +63,7 @@ $route['api/book/(:any)'] = 'Books/$1';
 $route['acquisition/(:any)'] = 'Acquisition/$1';
 $route['acquisition'] = 'Acquisition/index';
 
+$route['inventory/(:any)'] = 'Inventory/$1';
+$route['inventory'] = 'Inventory/index';
+
 $route['(:any)'] = 'Main/$1';
