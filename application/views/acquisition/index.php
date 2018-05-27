@@ -104,7 +104,7 @@
 <script>
 	var bookTable = $('#bookTable').DataTable({
 		ajax: {
-			url: '/books/get_all',
+			url: 'api/books/get_all',
 			dataSrc: '',
 		},
 		columns: [
@@ -147,7 +147,7 @@
 		$('form#submitBookForm input#actionField').val('update');
 
 		$.ajax({
-			url: '/book/get',
+			url: 'api/book/get',
 			type: 'get',
 			data: {
 				id: $(e.target).attr('data-value'),
@@ -174,7 +174,7 @@
 	function submitBook(e) {
 		if($(e.target).find('input#actionField').val() == 'add') {
 			$.ajax({
-				url: '/book/add',
+				url: 'api/book/add',
 				type: 'post',
 				data: $(e.target).serializeArray()
 			}).done(function(data) {
@@ -183,7 +183,7 @@
 			});
 		} else if($(e.target).find('input#actionField').val() == 'update') {
 			$.ajax({
-				url: '/book/update',
+				url: 'api/book/update',
 				type: 'post',
 				data: $(e.target).serializeArray()
 			}).done(function(data) {
@@ -197,7 +197,7 @@
 
 	function addCategory(e) {
 		$.ajax({
-			url: '/category/add',
+			url: 'api/category/add',
 			type: 'post',
 			data: $(e.target).serializeArray()
 		}).done(function(data) {
@@ -210,7 +210,7 @@
 
 	function deleteBook(e) {
 		$.ajax({
-			url: '/book/delete',
+			url: 'api/book/delete',
 			type: 'post',
 			data: {
 				id: $(e.target).attr('data-value')
@@ -225,7 +225,7 @@
 
 	function updateBook(e) {
 		$.ajax({
-			url: '/book/update',
+			url: 'api/book/update',
 			type: 'post',
 			data: $()
 		}).done(function() {
