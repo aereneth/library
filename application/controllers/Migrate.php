@@ -24,4 +24,13 @@ class Migrate extends CI_Controller
         }
     }
 
+    public function version($ver)
+    {
+        $this->load->library('migration');
+
+        if ($this->migration->version($ver) === FALSE)
+        {
+            show_error($this->migration->error_string());
+        }
+    }
 }

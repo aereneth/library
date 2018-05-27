@@ -51,6 +51,10 @@ class Migration_Create_reservations extends CI_Migration {
                 'constraint' => '255',
                 'null' => TRUE
             ),
+            'deleted' => array(
+                'type' => 'TINYINT',
+                'default' => 0,
+            ),
             'CONSTRAINT fk_reservations_book FOREIGN KEY (book_id) REFERENCES books(id)',
             'CONSTRAINT fk_reservations_user FOREIGN KEY (user_id) REFERENCES users(id)',
         ));
