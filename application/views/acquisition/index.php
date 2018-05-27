@@ -4,7 +4,9 @@
 	<div class="card-panel">
 		<button class="btn waves-effect blue" onclick="openAddBookModal()"><i class="material-icons left">add</i>Add Book</button>
 		<button class="btn waves-effect blue modal-trigger" data-target="addCategoryModal"><i class="material-icons left">add</i>Add Category</button>
-		<table id="bookTable" class="striped highlight responsive-table">
+		<br>
+		<br>
+		<table id="bookTable" class="hover">
 			<thead>
 				<tr>
 					<th>ISBN</th>
@@ -103,6 +105,9 @@
 	</form>
 </div>
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.js"></script>
+
 <script>
 	var bookTable = $('#bookTable').DataTable({
 		ajax: {
@@ -127,8 +132,14 @@
 			{
 				data: 'id',
 				render: function(data, type, row) {
-					return `<button class="btn btn-small blue waves-effect white-text" data-value="${data}" onclick="openUpdateBookModal(event)"><i class="material-icons left">edit</i>Update</button>
-					<button class="btn btn-small  red waves-effect white-text" data-value="${data}" onclick="deleteBook(event)"><i class="material-icons left">delete</i>Delete</button>`;
+					return `<div class="row">
+					<div class="col s6">
+					<button class="btn btn-small blue waves-effect white-text" data-value="${data}" onclick="openUpdateBookModal(event)">Update</button>
+					</div>
+					<div class="col s6">
+					<button class="btn btn-small red waves-effect white-text" data-value="${data}" onclick="deleteBook(event)">Delete</button>
+					</div>
+					</div>`;
 				}
 			}
 		]
@@ -211,6 +222,10 @@
 	}
 
 	function deleteBook(e) {
+		if(!confirm('Are you sure you want to delete this book?')) {
+			return;
+		}
+		
 		$.ajax({
 			url: 'api/book/delete',
 			type: 'post',
