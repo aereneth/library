@@ -17,8 +17,8 @@ class Migration_Create_categories extends CI_Migration {
                 'constraint' => '255',
             ),
             'deleted' => array(
-                'type' => 'TINYINT',
-                'default' => 0,
+                'type' => 'BOOLEAN',
+                'default' => FALSE,
             ),
         ));
         $this->dbforge->add_key('id', TRUE);
