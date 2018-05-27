@@ -38,6 +38,10 @@
                     </div>
                 </form>
             </div>
+            <h5 class="center-align blue-text text-darken-1">OR</h5>
+            <center>
+                <a href="<?= base_url('catalog') ?>" class="btn btn-large waves-effect blue"><i class="material-icons left">library_books</i>Open Online Public Access Catalog</a>
+            </center>
         </div>
     </div>
 </div>

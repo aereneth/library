@@ -28,6 +28,9 @@
     <li><a href="<?= base_url('acquisition') ?>" class="waves-effect"><i class="material-icons">add_box</i>Acquisition</a></li>
     <li><a href="#!" class="waves-effect"><i class="material-icons">autorenew</i>Circulation</a></li>
     <li><a href="<?= base_url('inventory') ?>" class="waves-effect"><i class="material-icons">create</i>Inventory</a></li>
+    <div class="divider"></div>
+    <li><a class="subheader">Catalog</a></li>
+    <li><a href="<?= base_url('catalog') ?>" class="waves-effect"><i class="material-icons">library_books</i>OPAC</a></li>
     <li><div class="divider"></div></li>
     <li><a class="waves-effect" href="<?= base_url('/logout') ?>"><i class="material-icons">exit_to_app</i>Logout</a></li>
 </ul>

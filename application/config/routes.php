@@ -66,4 +66,6 @@ $route['acquisition'] = 'Acquisition/index';
 $route['inventory/(:any)'] = 'Inventory/$1';
 $route['inventory'] = 'Inventory/index';
 
+$route['catalog'] = 'Catalog/index';
+
 $route['(:any)'] = 'Main/$1';
