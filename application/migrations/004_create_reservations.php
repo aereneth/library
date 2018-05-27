@@ -23,13 +23,13 @@ class Migration_Create_reservations extends CI_Migration {
                 'unsigned' => TRUE,
             ),
             'reservation_date' => array(
-                'type' => 'DATETIME',
+                'type' => 'TIMESTAMP',
             ),
             'due_date' => array(
-                'type' => 'DATETIME',
+                'type' => 'TIMESTAMP',
             ),
             'return_date' => array(
-                'type' => 'DATETIME',
+                'type' => 'TIMESTAMP',
                 'null' => TRUE
             ),
             'reservation_days' => array(
