@@ -42,7 +42,7 @@ class Migration_Create_users extends CI_Migration {
                 'constraint' => '255',
             ),
             'deleted' => array(
-                'type' => 'TINYINT',
+                'type' => 'BOOLEAN',
                 'default' => 0,
             ),
         ));
