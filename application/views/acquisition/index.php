@@ -1,25 +1,27 @@
 <div class="container">
-	<h2 class="center-align">Acquisition</h2>
-	<button class="btn waves-effect blue" onclick="openAddBookModal()"><i class="material-icons left">add</i>Add Book</button>
-	<button class="btn waves-effect blue modal-trigger" data-target="addCategoryModal"><i class="material-icons left">add</i>Add Category</button>
+	<h3 class="blue-text text-darken-1 center-align">Acquisition</h3>
 	<br>
-	<table id="bookTable" class="striped highlight responsive-table">
-		<thead>
-			<tr>
-				<th>ISBN</th>
-				<th>Title</th>
-				<th>Author</th>
-				<th>Category</th>
-				<th>Publisher</th>
-				<th>Publication Year</th>
-				<th>Edition</th>
-				<th>Acquisition Date</th>
-				<th>Recent Update Date</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody></tbody>
-	</table>
+	<div class="card-panel">
+		<button class="btn waves-effect blue" onclick="openAddBookModal()"><i class="material-icons left">add</i>Add Book</button>
+		<button class="btn waves-effect blue modal-trigger" data-target="addCategoryModal"><i class="material-icons left">add</i>Add Category</button>
+		<table id="bookTable" class="striped highlight responsive-table">
+			<thead>
+				<tr>
+					<th>ISBN</th>
+					<th>Title</th>
+					<th>Author</th>
+					<th>Category</th>
+					<th>Publisher</th>
+					<th>Publication Year</th>
+					<th>Edition</th>
+					<th>Acquisition Date</th>
+					<th>Recent Update Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
 </div>
 
 <div id="bookModal" class="modal modal-fixed-footer">
