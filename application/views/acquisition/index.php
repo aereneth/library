@@ -104,7 +104,7 @@
 <script>
 	var bookTable = $('#bookTable').DataTable({
 		ajax: {
-			url: 'api/books/get_all',
+			url: 'api/book/get_all',
 			dataSrc: '',
 		},
 		columns: [
