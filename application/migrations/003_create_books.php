@@ -38,6 +38,7 @@ class Migration_Create_books extends CI_Migration {
             'other_author' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '255',
+                'null' => TRUE,
             ),
             'publisher' => array(
                 'type' => 'VARCHAR',

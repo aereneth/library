@@ -10,18 +10,80 @@ class Books extends CI_Controller
 
     public function add()
     {
-        echo $this->books->insert(array(
-            'isbn' => $this->input->post('isbn'),
-            'title' => $this->input->post('title'),
-            'other_title' => $this->input->post('other_title'),
-            'category_id' => $this->input->post('category_id'),
-            'author' => $this->input->post('author'),
-            'other_author' => $this->input->post('other_author'),
-            'publisher' => $this->input->post('publisher'),
-            'publication_year' => $this->input->post('publication_year'),
-            'edition' => $this->input->post('edition'),
-            'description' => $this->input->post('description'),
-        ));
+        $config = array(
+            array(
+                'field' => 'isbn',
+                'label' => 'ISBN',
+                'rules' => 'required|exact_length[5]|is_unique[books.isbn]',
+            ),
+            array(
+                'field' => 'title',
+                'label' => 'Title',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'other_title',
+                'label' => 'Other Title',
+                'rules' => '',
+            ),
+            array(
+                'field' => 'category_id',
+                'label' => 'Category',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'author',
+                'label' => 'Author',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'other_author',
+                'label' => 'Other_Author',
+                'rules' => '',
+            ),
+            array(
+                'field' => 'publisher',
+                'label' => 'Publisher',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'publication_year',
+                'label' => 'Publication Year',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'edition',
+                'label' => 'Edition',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'description',
+                'label' => 'Description',
+                'rules' => 'required',
+            ),
+        );
+
+        $this->form_validation->set_rules($config);
+        $this->form_validation->set_error_delimiters('', '<br>');
+
+        if($this->form_validation->run()) {
+            http_response_code(200);
+            echo $this->books->insert(array(
+                'isbn' => $this->input->post('isbn'),
+                'title' => $this->input->post('title'),
+                'other_title' => $this->input->post('other_title') ?? NULL,
+                'category_id' => $this->input->post('category_id'),
+                'author' => $this->input->post('author'),
+                'other_author' => $this->input->post('other_author') ?? NULL,
+                'publisher' => $this->input->post('publisher'),
+                'publication_year' => $this->input->post('publication_year'),
+                'edition' => $this->input->post('edition'),
+                'description' => $this->input->post('description'),
+            ));
+        } else {
+            http_response_code(400);
+            echo validation_errors();
+        }
     }
 
     public function update()
