@@ -1,7 +1,7 @@
 <div class="valign-wrapper">
     <div class="container">
-        <div class="section"></div>
-        <div class="section"></div>
+        <br>
+        <br>
         <div class="row">
             <div class="col s6 offset-s3">
                 <div class="card">

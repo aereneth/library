@@ -14,8 +14,10 @@ class Main extends CI_Controller
             redirect('/login');
         }
 
+        $data['user'] = $this->session->userdata('user');
+
         $this->load->view('partials/header');
-        $this->load->view('partials/sidebar');
+        $this->load->view('partials/sidebar', $data);
         $this->load->view('index');
         $this->load->view('partials/footer');
     }
