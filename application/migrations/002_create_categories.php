@@ -15,6 +15,7 @@ class Migration_Create_categories extends CI_Migration {
             'name' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '255',
+                'unique' => TRUE,
             ),
             'deleted' => array(
                 'type' => 'BOOLEAN',
