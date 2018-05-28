@@ -1,25 +1,29 @@
 <div class="container">
-	<h2 class="center-align">Acquisition</h2>
-	<button class="btn waves-effect blue" onclick="openAddBookModal()"><i class="material-icons left">add</i>Add Book</button>
-	<button class="btn waves-effect blue modal-trigger" data-target="addCategoryModal"><i class="material-icons left">add</i>Add Category</button>
+	<h3 class="blue-text text-darken-1 center-align">Acquisition</h3>
 	<br>
-	<table id="bookTable" class="striped highlight responsive-table">
-		<thead>
-			<tr>
-				<th>ISBN</th>
-				<th>Title</th>
-				<th>Author</th>
-				<th>Category</th>
-				<th>Publisher</th>
-				<th>Publication Year</th>
-				<th>Edition</th>
-				<th>Acquisition Date</th>
-				<th>Recent Update Date</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody></tbody>
-	</table>
+	<div class="card-panel">
+		<button class="btn waves-effect blue" onclick="openAddBookModal()"><i class="material-icons left">add</i>Add Book</button>
+		<button class="btn waves-effect blue modal-trigger" data-target="addCategoryModal"><i class="material-icons left">add</i>Add Category</button>
+		<br>
+		<br>
+		<table id="bookTable" class="hover">
+			<thead>
+				<tr>
+					<th>ISBN</th>
+					<th>Title</th>
+					<th>Author</th>
+					<th>Category</th>
+					<th>Publisher</th>
+					<th>Publication Year</th>
+					<th>Edition</th>
+					<th>Acquisition Date</th>
+					<th>Recent Update Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
 </div>
 
 <div id="bookModal" class="modal modal-fixed-footer">
@@ -27,10 +31,10 @@
 		<input type="hidden" id="actionField">
 		<input type="hidden" name="id" id="idField">
 		<div class="modal-content">
-			<h4>Add Book</h4>
+			<h4>Add/Update Book</h4>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="isbnField" type="text" class="validate" name="isbn">
+					<input id="isbnField" type="text" class="validate" name="isbn" required>
 					<label for="isbnField">ISBN</label>
 				</div>
 				<div class="input-field col s12">
@@ -42,16 +46,15 @@
 					<label for="otherTitleField">Other Title</label>
 				</div>
 				<div class="input-field col s12">
-					<input id="authorField" type="text" class="validate" name="author">
+					<input id="authorField" type="text" class="validate" name="author" required>
 					<label for="authorField">Author</label>
 				</div>
 				<div class="input-field col s12">
-					<input id="otherAuthorField" type="text" class="validate" name="other_author">
+					<input id="otherAuthorField" type="text" class="validate" name="other_author" >
 					<label for="otherAuthorField">Other Author</label>
 				</div>
 				<div class="input-field col s12">
-					<select id="categoryField" name="category_id">
-						<option value="" disabled selected>Choose category</option>
+					<select id="categoryField" name="category_id" required>
 						<?php foreach($categories as $category): ?>
 						<option value="<?= $category->id ?>"><?= $category->name ?></option>
 						<?php endforeach ?>
@@ -59,7 +62,7 @@
 					<label for="titleField">Category</label>
 				</div>
 				<div class="input-field col s12">
-					<input id="publisherField" type="text" class="validate" name="publisher">
+					<input id="publisherField" type="text" class="validate" name="publisher" required>
 					<label for="publisherField">Publisher</label>
 				</div>
 				<div class="input-field col s6">
@@ -67,17 +70,17 @@
 					<label for="yearField">Publication Year</label>
 				</div>
 				<div class="input-field col s6">
-					<input id="editionField" type="text" class="validate" name="edition" maxlength="4">
+					<input id="editionField" type="text" class="validate" name="edition">
 					<label for="editionField">Edition</label>
 				</div>
-				<div class="input-field col s12">
+				<div class="input-field col s12" required>
 					<textarea name="description" id="descriptionField" class="materialize-textarea" cols="80" rows="10"></textarea>
 					<label for="descriptionField">Description</label>
 				</div>
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="submit" class="modal-close waves-effect waves-green btn-flat">Save</button>
+			<button type="submit" class="waves-effect waves-green btn-flat">Save</button>
 			<button class="modal-close waves-effect waves-red btn-flat">Cancel</button>
 		</div>
 	</form>
@@ -89,17 +92,20 @@
 			<h4>Add Category</h4>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="categoryNameField" type="text" class="validate" name="name">
-					<label for="categoryNameField">Category</label>
+					<input id="categoryNameField" type="text" class="validate" name="name" required>
+					<label for="categoryNameField">Name</label>
 				</div>
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="submit" class="modal-close waves-effect waves-green btn-flat">Save</button>
+			<button type="submit" class="waves-effect waves-green btn-flat">Save</button>
 			<button class="modal-close waves-effect waves-red btn-flat">Cancel</button>
 		</div>
 	</form>
 </div>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.js"></script>
 
 <script>
 	var bookTable = $('#bookTable').DataTable({
@@ -125,8 +131,8 @@
 			{
 				data: 'id',
 				render: function(data, type, row) {
-					return `<button class="btn btn-small blue waves-effect white-text" data-value="${data}" onclick="openUpdateBookModal(event)"><i class="material-icons left">edit</i>Update</button>
-					<button class="btn btn-small  red waves-effect white-text" data-value="${data}" onclick="deleteBook(event)"><i class="material-icons left">delete</i>Delete</button>`;
+					return `<button class="btn btn-small blue waves-effect white-text" data-value="${data}" onclick="openUpdateBookModal(event)">Update</button>
+					<button class="btn btn-small red waves-effect white-text" data-value="${data}" onclick="deleteBook(event)">Delete</button>`;
 				}
 			}
 		]
@@ -180,6 +186,10 @@
 			}).done(function(data) {
 				$(e.target)[0].reset();
 				bookTable.ajax.reload();
+				$('#bookModal').modal('close');
+				M.toast({html: 'Book added', classes: 'rounded'});
+			}).fail(function(data) {
+				M.toast({html: data['responseText'], classes: 'rounded'});
 			});
 		} else if($(e.target).find('input#actionField').val() == 'update') {
 			$.ajax({
@@ -189,6 +199,10 @@
 			}).done(function(data) {
 				$(e.target)[0].reset();
 				bookTable.ajax.reload();
+				$('#bookModal').modal('close');
+				M.toast({html: 'Book added', classes: 'rounded'});
+			}).fail(function(data) {
+				M.toast({html: data['responseText'], classes: 'rounded'});
 			});
 		}
 
@@ -201,33 +215,40 @@
 			type: 'post',
 			data: $(e.target).serializeArray()
 		}).done(function(data) {
-			// $('form#addBookForm input#categoryField').append(`<option value="${data}">${$(e.target).find('input#categoryNameField').val()}</option>`);
+			$('form#submitBookForm select#categoryField').html('');
+
+			$.ajax({
+				url: 'api/category/get_all',
+				type: 'get',
+				dataType: 'json',
+			}).done(function(data) {
+				for(var i = 0; i < data.length; i++) {
+					$('form#submitBookForm select#categoryField').append(`<option value="${data[i]['id']}">${data[i]['name']}</option>`);
+				}
+				$('form#submitBookForm select#categoryField').formSelect();
+			});
+
 			$(e.target)[0].reset();
+			M.toast({html: 'Category added', classes: 'rounded'});
+			$('#addCategoryModal').modal('close');
+		}).fail(function(data) {
+			M.toast({html: data['responseText'], classes: 'rounded'});
 		});
 
 		e.preventDefault();
 	}
 
 	function deleteBook(e) {
+		if(!confirm('Are you sure you want to delete this book?')) {
+			return;
+		}
+		
 		$.ajax({
 			url: 'api/book/delete',
 			type: 'post',
 			data: {
 				id: $(e.target).attr('data-value')
 			}
-		}).done(function() {
-			M.toast({html: 'Book deleted', classes: 'rounded'});
-			bookTable.ajax.reload();
-		});
-
-		e.preventDefault();
-	}
-
-	function updateBook(e) {
-		$.ajax({
-			url: 'api/book/update',
-			type: 'post',
-			data: $()
 		}).done(function() {
 			M.toast({html: 'Book deleted', classes: 'rounded'});
 			bookTable.ajax.reload();
