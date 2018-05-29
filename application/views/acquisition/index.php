@@ -3,10 +3,10 @@
 	<br>
 	<div class="card-panel">
 		<button class="btn waves-effect blue" onclick="openAddBookModal()"><i class="material-icons left">add</i>Add Book</button>
-		<button class="btn waves-effect blue modal-trigger" data-target="categoryModal"><i class="material-icons left">add</i>Add Category</button>
+		<button class="btn waves-effect blue modal-trigger" data-target="categoryModal"><i class="material-icons left">add</i>Category</button>
 		<br>
 		<br>
-		<table id="bookTable" class="hover">
+		<table id="bookTable" class="hover responsive-table">
 			<thead>
 				<tr>
 					<th>ISBN</th>
@@ -178,7 +178,7 @@
 	function openUpdateBookModal(e) {
 		var modal = $('#bookModal');
 
-		$('#bookModalLabel').html('Add Modal');
+		$('#bookModalLabel').html('Update Modal');
 
 		$('form#submitBookForm')[0].reset();
 		$('form#submitBookForm input#actionField').val('update');
@@ -202,7 +202,19 @@
 			modal.find('input#yearField').val(book['publication_year']);
 			modal.find('input#editionField').val(book['edition']);
 			modal.find('textarea#descriptionField').val(book['description']);
-			M.textareaAutoResize($('textarea#descriptionField'));
+
+			M.updateTextFields(modal.find('input#idField'));
+			M.updateTextFields(modal.find('input#isbnField'));
+			M.updateTextFields(modal.find('input#titleField'));
+			M.updateTextFields(modal.find('input#otherTitleField'));
+			M.updateTextFields(modal.find('select#categoryField'));
+			M.updateTextFields(modal.find('input#authorField'));
+			M.updateTextFields(modal.find('input#otherAuthorField'));
+			M.updateTextFields(modal.find('input#publisherField'));
+			M.updateTextFields(modal.find('input#yearField'));
+			M.updateTextFields(modal.find('input#editionField'));
+			M.updateTextFields(modal.find('input#descriptionField'));
+			M.textareaAutoResize(modal.find('textarea#descriptionField'));
 		});
 
 		modal.modal('open');
@@ -269,7 +281,6 @@
 
 			$(e.target)[0].reset();
 			M.toast({html: 'Category added', classes: 'rounded'});
-			$('#categoryModal').modal('close');
 		}).fail(function(data) {
 			M.toast({html: data['responseText'], classes: 'rounded'});
 		});

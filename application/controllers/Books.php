@@ -37,11 +37,6 @@ class Books extends CI_Controller
                 'rules' => 'required',
             ),
             array(
-                'field' => 'other_author',
-                'label' => 'Other_Author',
-                'rules' => '',
-            ),
-            array(
                 'field' => 'publisher',
                 'label' => 'Publisher',
                 'rules' => 'required',

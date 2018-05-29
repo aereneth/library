@@ -1,5 +1,5 @@
 <nav class="blue" role="navigation">
-    <div class="nav-wrapper container">
+    <div class="nav-wrapper">
         <a id="logo-container" href="#" class="brand-logo">adInfinitum</a>
         <ul class="right hide-on-med-and-down">
             <li>
@@ -24,16 +24,20 @@
             <a href="#email"><span class="white-text email"><?= $user->email_address ?></span></a>
         </div>
     </li>
+    <?php if($user->privilege <= 2): ?>
     <li><a class="subheader">Library</a></li>
     <li><a href="<?= base_url('acquisition') ?>" class="waves-effect"><i class="material-icons">add_box</i>Acquisition</a></li>
     <li><a href="#!" class="waves-effect"><i class="material-icons">autorenew</i>Circulation</a></li>
     <li><a href="<?= base_url('inventory') ?>" class="waves-effect"><i class="material-icons">create</i>Inventory</a></li>
     <li><div class="divider"></div></li>
+    <?php endif ?>
     <li><a class="subheader">Catalog</a></li>
     <li><a href="<?= base_url('catalog') ?>" class="waves-effect"><i class="material-icons">library_books</i>OPAC</a></li>
     <li><div class="divider"></div></li>
+    <?php if($user->privilege <= 1): ?>
     <li><a class="subheader">Accounts</a></li>
     <li><a href="<?= base_url('account/add') ?>" class="waves-effect"><i class="material-icons">add_box</i>Create Account</a></li>
     <li><div class="divider"></div></li>
+    <?php endif ?>
     <li><a class="waves-effect" href="<?= base_url('/logout') ?>"><i class="material-icons">exit_to_app</i>Logout</a></li>
 </ul>
