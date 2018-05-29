@@ -41,8 +41,8 @@
             <h5 class="center-align blue-text text-darken-1">OR</h5>
             <center>
                 <a href="<?= base_url('register') ?>" class="btn btn-large blue waves-effect waves-light">
+                    <i class="material-icons left">add</i>
                     Register
-                    <i class="material-icons right">add_box</i>
                 </a>
             </center>
             <br>

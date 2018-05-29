@@ -94,7 +94,7 @@ class Main extends CI_Controller
                     'email_address' => $this->input->post('email'),
                     'contact_number' => $this->input->post('contact_number'),
                     'address' => $this->input->post('address'),
-                    'privilege' => $this->input->post('privilege'),
+                    'privilege' => 3,
                     'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
                 ));
 
