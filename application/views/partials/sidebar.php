@@ -36,7 +36,7 @@
     <li><div class="divider"></div></li>
     <?php if($user->privilege <= 1): ?>
     <li><a class="subheader">Accounts</a></li>
-    <li><a href="<?= base_url('account/add') ?>" class="waves-effect"><i class="material-icons">add_box</i>Create Account</a></li>
+    <li><a href="<?= base_url('account') ?>" class="waves-effect"><i class="material-icons">people</i>Manage Account</a></li>
     <li><div class="divider"></div></li>
     <?php endif ?>
     <li><a class="waves-effect" href="<?= base_url('/logout') ?>"><i class="material-icons">exit_to_app</i>Logout</a></li>
