@@ -14,7 +14,7 @@ class Books extends CI_Controller
             array(
                 'field' => 'isbn',
                 'label' => 'ISBN',
-                'rules' => 'required|exact_length[5]|is_unique[books.isbn]',
+                'rules' => 'required|exact_length[5]|numeric|is_unique[books.isbn]',
             ),
             array(
                 'field' => 'title',
@@ -79,6 +79,8 @@ class Books extends CI_Controller
                 'publication_year' => $this->input->post('publication_year'),
                 'edition' => $this->input->post('edition'),
                 'description' => $this->input->post('description'),
+                'acquisition_date' => (new DateTime('NOW', new DateTimeZone('Asia/Manila')))->format('c'),
+                'recent_update_date' => (new DateTime('NOW', new DateTimeZone('Asia/Manila')))->format('c'),
             ));
         } else {
             http_response_code(400);
@@ -99,6 +101,7 @@ class Books extends CI_Controller
             'publication_year' => $this->input->post('publication_year'),
             'edition' => $this->input->post('edition'),
             'description' => $this->input->post('description'),
+            'recent_update_date' => (new DateTime('NOW', new DateTimeZone('Asia/Manila')))->format('c'),
         ));
     }
 

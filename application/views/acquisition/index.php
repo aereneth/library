@@ -3,7 +3,7 @@
 	<br>
 	<div class="card-panel">
 		<button class="btn waves-effect blue" onclick="openAddBookModal()"><i class="material-icons left">add</i>Add Book</button>
-		<button class="btn waves-effect blue modal-trigger" data-target="addCategoryModal"><i class="material-icons left">add</i>Add Category</button>
+		<button class="btn waves-effect blue modal-trigger" data-target="categoryModal"><i class="material-icons left">add</i>Add Category</button>
 		<br>
 		<br>
 		<table id="bookTable" class="hover">
@@ -31,7 +31,7 @@
 		<input type="hidden" id="actionField">
 		<input type="hidden" name="id" id="idField">
 		<div class="modal-content">
-			<h4>Add/Update Book</h4>
+			<h5 id="bookModalLabel" class="blue-text">Add/Update Book</h5>
 			<div class="row">
 				<div class="input-field col s12">
 					<input id="isbnField" type="text" class="validate" name="isbn" required>
@@ -86,22 +86,49 @@
 	</form>
 </div>
 
-<div id="addCategoryModal" class="modal modal-fixed-footer">
-	<form id="addCategoryForm" method="post" onsubmit="addCategory(event)">
-		<div class="modal-content">
-			<h4>Add Category</h4>
+<div id="categoryModal" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<div class="row valign-wrapper">
+			<div class="col s10">
+				<h5 class="blue-text">Add Category</h5>
+			</div>
+			<div class="col s2">
+				<button type="submit" form="addCategoryForm" class="btn waves-effect green right"><i class="material-icons left">add</i>Create</button>
+			</div>
+		</div>
+		<form id="addCategoryForm" method="post" onsubmit="addCategory(event)">
 			<div class="row">
 				<div class="input-field col s12">
 					<input id="categoryNameField" type="text" class="validate" name="name" required>
 					<label for="categoryNameField">Name</label>
 				</div>
 			</div>
+		</form>
+		<div class="divider"></div>
+		<div class="row valign-wrapper">
+			<div class="col s10">
+				<h5 class="blue-text">Delete Category</h5>
+			</div>
+			<div class="col s2">
+				<button type="submit" form="deleteCategoryForm" class="btn waves-effect red right"><i class="material-icons left">delete</i>Delete</button>
+			</div>
 		</div>
-		<div class="modal-footer">
-			<button type="submit" class="waves-effect waves-green btn-flat">Save</button>
-			<button class="modal-close waves-effect waves-red btn-flat">Cancel</button>
-		</div>
-	</form>
+		<form id="deleteCategoryForm" method="post" onsubmit="deleteCategory(event)">
+			<div id="categoryRow" class="row">
+				<?php foreach($categories as $category): ?>
+				<p class="col s3">
+					<label>
+						<input type="checkbox" name="category[<?= $category->id ?>]">
+						<span><?= $category->name ?></span>
+					</label>
+				</p>
+				<?php endforeach ?>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="modal-close waves-effect waves-red btn-flat">Close</button>
+	</div>
 </div>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.css"/>
@@ -141,6 +168,8 @@
 	function openAddBookModal(e) {
 		var modal = $('#bookModal');
 
+		$('#bookModalLabel').html('Add Modal');
+
 		$('form#submitBookForm')[0].reset();
 		$('form#submitBookForm input#actionField').val('add');
 		modal.modal('open');
@@ -148,6 +177,8 @@
 	
 	function openUpdateBookModal(e) {
 		var modal = $('#bookModal');
+
+		$('#bookModalLabel').html('Add Modal');
 
 		$('form#submitBookForm')[0].reset();
 		$('form#submitBookForm input#actionField').val('update');
@@ -200,40 +231,11 @@
 				$(e.target)[0].reset();
 				bookTable.ajax.reload();
 				$('#bookModal').modal('close');
-				M.toast({html: 'Book added', classes: 'rounded'});
+				M.toast({html: 'Book updated', classes: 'rounded'});
 			}).fail(function(data) {
 				M.toast({html: data['responseText'], classes: 'rounded'});
 			});
 		}
-
-		e.preventDefault();
-	}
-
-	function addCategory(e) {
-		$.ajax({
-			url: 'api/category/add',
-			type: 'post',
-			data: $(e.target).serializeArray()
-		}).done(function(data) {
-			$('form#submitBookForm select#categoryField').html('');
-
-			$.ajax({
-				url: 'api/category/get_all',
-				type: 'get',
-				dataType: 'json',
-			}).done(function(data) {
-				for(var i = 0; i < data.length; i++) {
-					$('form#submitBookForm select#categoryField').append(`<option value="${data[i]['id']}">${data[i]['name']}</option>`);
-				}
-				$('form#submitBookForm select#categoryField').formSelect();
-			});
-
-			$(e.target)[0].reset();
-			M.toast({html: 'Category added', classes: 'rounded'});
-			$('#addCategoryModal').modal('close');
-		}).fail(function(data) {
-			M.toast({html: data['responseText'], classes: 'rounded'});
-		});
 
 		e.preventDefault();
 	}
@@ -255,5 +257,62 @@
 		});
 
 		e.preventDefault();
+	}
+
+	function addCategory(e) {
+		$.ajax({
+			url: 'api/category/add',
+			type: 'post',
+			data: $(e.target).serializeArray()
+		}).done(function(data) {
+			reloadCategories();
+
+			$(e.target)[0].reset();
+			M.toast({html: 'Category added', classes: 'rounded'});
+			$('#categoryModal').modal('close');
+		}).fail(function(data) {
+			M.toast({html: data['responseText'], classes: 'rounded'});
+		});
+
+		e.preventDefault();
+	}
+
+	function deleteCategory(e) {
+		$.ajax({
+			url: 'api/category/delete',
+			type: 'post',
+			data: $(e.target).serializeArray(),
+		}).done(function() {
+			reloadCategories();	
+			M.toast({html: 'Category deleted', classes: 'rounded'});
+		}).fail(function(data) {
+			M.toast({html: data['responseText'], classes: 'rounded'});
+		});
+
+		e.preventDefault();
+	}
+
+	function reloadCategories() {
+		$('form#submitBookForm select#categoryField').html('');
+		$('#categoryRow').html('');
+
+		$.ajax({
+			url: 'api/category/get_all',
+			type: 'get',
+			dataType: 'json',
+		}).done(function(data) {
+			for(var i = 0; i < data.length; i++) {
+				$('#categoryRow').append(`
+				<p class="col s3">
+					<label>
+						<input type="checkbox" name="category[${data[i]['id']}]">
+						<span>${data[i]['name']}</span>
+					</label>
+				</p>
+				`);
+				$('form#submitBookForm select#categoryField').append(`<option value="${data[i]['id']}">${data[i]['name']}</option>`);
+			}
+			$('form#submitBookForm select#categoryField').formSelect();
+		});
 	}
 </script>
