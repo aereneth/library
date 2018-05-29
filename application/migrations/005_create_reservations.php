@@ -17,7 +17,7 @@ class Migration_Create_reservations extends CI_Migration {
                 'constraint' => 5,
                 'unsigned' => TRUE,
             ),
-            'book_id' => array(
+            'copy_id' => array(
                 'type' => 'INT',
                 'constraint' => 5,
                 'unsigned' => TRUE,
@@ -55,7 +55,7 @@ class Migration_Create_reservations extends CI_Migration {
                 'type' => 'BOOLEAN',
                 'default' => FALSE,
             ),
-            'CONSTRAINT fk_reservations_book FOREIGN KEY (book_id) REFERENCES books(id)',
+            'CONSTRAINT fk_reservations_copy FOREIGN KEY (copy_id) REFERENCES copies(id)',
             'CONSTRAINT fk_reservations_user FOREIGN KEY (user_id) REFERENCES users(id)',
         ));
         $this->dbforge->add_key('id', TRUE);

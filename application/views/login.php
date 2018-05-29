@@ -28,7 +28,7 @@
                             </div>
                             <div class="col s12">
                                 <center>
-                                    <button class="btn blue waves-effect waves-light">
+                                    <button type="submit" class="btn blue waves-effect waves-light">
                                         Login
                                         <i class="material-icons right">send</i>
                                     </button>
@@ -39,6 +39,13 @@
                 </form>
             </div>
             <h5 class="center-align blue-text text-darken-1">OR</h5>
+            <center>
+                <a href="<?= base_url('register') ?>" class="btn btn-large blue waves-effect waves-light">
+                    Register
+                    <i class="material-icons right">add_box</i>
+                </a>
+            </center>
+            <br>
             <center>
                 <a href="<?= base_url('catalog') ?>" class="btn btn-large waves-effect blue"><i class="material-icons left">library_books</i>Open Online Public Access Catalog</a>
             </center>
