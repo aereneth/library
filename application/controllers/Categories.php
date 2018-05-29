@@ -32,6 +32,23 @@ class Categories extends CI_Controller
         }
     }
 
+    public function delete()
+    {
+        $categories = array();
+
+        foreach($this->input->post('category') as $index => $category) {
+            if($this->books->get_many_by(array('category_id' => $index))) {
+                http_response_code(400);
+                echo 'Category is still used';
+                return;
+            }
+            array_push($categories, $index);
+        }
+
+        http_response_code(200);
+        $this->categories->delete_many($categories);
+    }
+
     public function get_all()
     {
         echo json_encode($this->categories->order_by('name')->get_all());
