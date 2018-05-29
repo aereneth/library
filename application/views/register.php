@@ -36,15 +36,7 @@
                                 <input type="text" name="address" id="addressField" class="validate" required>
                                 <label for="addressField">Address</label>
                             </div>
-                            <div class="input-field col s12 m6">
-                                <select name="privilege" id="privilegeField">
-                                    <option value="1">Admin</option>
-                                    <option value="2">Staff</option>
-                                    <option value="3" selected>User</option>
-                                </select>
-                                <label for="privilegeField">Privilege</label>
-                            </div>
-                            <div class="input-field col s12 m6">
+                            <div class="input-field col s12">
                                 <input type="password" name="password" id="passwordField" class="validate" required>
                                 <label for="passwordField">Password</label>
                             </div>

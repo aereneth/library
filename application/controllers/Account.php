@@ -15,7 +15,7 @@ class Account extends CI_Controller
         }
 
         $data['user'] = $this->session->userdata('user');
-        $data['accounts'] = $this->users->get_all();
+        $data['accounts'] = $this->users->order_by('id')->get_all();
 
         $this->load->view('partials/header');
         $this->load->view('partials/sidebar', $data);
