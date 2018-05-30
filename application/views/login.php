@@ -10,7 +10,7 @@
         </div>
         <div class="col s12 m6 offset-m3">
             <div class="card">
-                <form action="<?= base_url('/login') ?>" method="post">
+                <form action="<?= base_url('login') ?>" method="post">
                     <div class="card-content">
                         <div class="row">
                             <div class="col s12">
