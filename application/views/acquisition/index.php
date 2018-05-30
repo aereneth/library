@@ -38,7 +38,7 @@
 					<label for="isbnField">ISBN</label>
 				</div>
 				<div class="input-field col s12">
-					<input id="titleField" type="text" class="validate" name="title">
+					<input id="titleField" type="text" class="validate" name="title" required>
 					<label for="titleField">Title</label>
 				</div>
 				<div class="input-field col s12">
@@ -50,7 +50,7 @@
 					<label for="authorField">Author</label>
 				</div>
 				<div class="input-field col s12">
-					<input id="otherAuthorField" type="text" class="validate" name="other_author" >
+					<input id="otherAuthorField" type="text" class="validate" name="other_author">
 					<label for="otherAuthorField">Other Author</label>
 				</div>
 				<div class="input-field col s12">
@@ -66,7 +66,7 @@
 					<label for="publisherField">Publisher</label>
 				</div>
 				<div class="input-field col s6">
-					<input id="yearField" type="text" class="validate" name="publication_year" maxlenght="4">
+					<input id="yearField" type="text" class="validate" name="publication_year" maxlength="4" required>
 					<label for="yearField">Publication Year</label>
 				</div>
 				<div class="input-field col s6">
@@ -272,6 +272,8 @@
 	}
 
 	function addCategory(e) {
+		$(e.target).find('input#categoryNameField').val(titleCase($(e.target).find('input#categoryNameField').val()));
+
 		$.ajax({
 			url: 'api/category/add',
 			type: 'post',
@@ -289,6 +291,10 @@
 	}
 
 	function deleteCategory(e) {
+		if(!confirm('Are you sure you want to delete these categories?')) {
+			return;
+		}
+
 		$.ajax({
 			url: 'api/category/delete',
 			type: 'post',
@@ -301,6 +307,12 @@
 		});
 
 		e.preventDefault();
+	}
+
+	function titleCase(str) {
+		return str.toLowerCase().split(' ').map(function(word) {
+			return (word.charAt(0).toUpperCase() + word.slice(1));
+		}).join(' ');
 	}
 
 	function reloadCategories() {
