@@ -11,7 +11,7 @@ class Main extends CI_Controller
     public function index()
     {
         if($this->session->userdata('user') == NULL) {
-            redirect('/login');
+            redirect('login');
         }
 
         $data['user'] = $this->session->userdata('user');
@@ -25,7 +25,7 @@ class Main extends CI_Controller
     public function login()
     {
         if($this->session->userdata('user') != NULL) {
-            redirect('/');
+            redirect();
         }
 
         if($this->input->server('REQUEST_METHOD') == 'POST') {
@@ -33,9 +33,9 @@ class Main extends CI_Controller
                 'email_address' => $this->input->post('email'),
             ));
 
-            if(password_verify($this->input->post('password'), $user->password)) {
+            if($user && password_verify($this->input->post('password'), $user->password)) {
                 $this->session->set_userdata('user', $user);
-                redirect('/');
+                redirect();
             }
         }
 
@@ -47,17 +47,17 @@ class Main extends CI_Controller
     public function logout()
     {
         if($this->session->userdata('user') == NULL) {
-            redirect('/login');
+            redirect('login');
         }
 
         $this->session->unset_userdata('user');
-        redirect('/login');
+        redirect('login');
     }
 
     public function register()
     {
         if($this->session->userdata('user') != NULL) {
-            redirect('/');
+            redirect();
         }
 
         $config = array(
