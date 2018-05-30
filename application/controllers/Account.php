@@ -33,12 +33,12 @@ class Account extends CI_Controller
             array(
                 'field' => 'first_name',
                 'label' => 'First Name',
-                'rules' => 'required|alpha_numeric_spaces',
+                'rules' => 'required|regex_match[/[a-zA-Z ]+/]',
             ),
             array(
                 'field' => 'last_name',
                 'label' => 'Last Name',
-                'rules' => 'required|alpha_numeric_spaces',
+                'rules' => 'required|regex_match[/[a-zA-Z ]+/]',
             ),
             array(
                 'field' => 'email',
@@ -58,8 +58,8 @@ class Account extends CI_Controller
         if($this->input->server('REQUEST_METHOD') == 'POST') {
             if($this->form_validation->run()) {
                 $this->users->insert(array(
-                    'first_name' => $this->input->post('first_name'),
-                    'last_name' => $this->input->post('last_name'),
+                    'first_name' => ucwords($this->input->post('first_name')),
+                    'last_name' => ucwords($this->input->post('last_name')),
                     'email_address' => $this->input->post('email'),
                     'contact_number' => $this->input->post('contact_number'),
                     'address' => $this->input->post('address'),
@@ -67,6 +67,7 @@ class Account extends CI_Controller
                     'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
                 ));
 
+                $this->session->set_flashdata(array('message' => 'Account successfully created'));
                 redirect('account');
             } else {
                 $data['errors'] = validation_errors();
@@ -117,8 +118,8 @@ class Account extends CI_Controller
         if($this->input->server('REQUEST_METHOD') == 'POST') {
             if($this->form_validation->run()) {
                 $this->users->update($user_id, array(
-                    'first_name' => $this->input->post('first_name'),
-                    'last_name' => $this->input->post('last_name'),
+                    'first_name' => ucwords($this->input->post('first_name')),
+                    'last_name' => ucwords($this->input->post('last_name')),
                     'email_address' => $this->input->post('email'),
                     'contact_number' => $this->input->post('contact_number'),
                     'address' => $this->input->post('address'),
@@ -126,6 +127,7 @@ class Account extends CI_Controller
                     'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
                 ));
 
+                $this->session->set_flashdata(array('message' => 'Account successfully updated'));
                 redirect('account');
             } else {
                 $data['errors'] = validation_errors();

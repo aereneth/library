@@ -33,7 +33,7 @@
                         }  ?>
                     </td>
                     <td>
-                        <a href="<?= base_url("account/update/{$account->id}") ?>" class="btn waves-effect green">Edit</a>
+                        <a href="<?= base_url("account/update/{$account->id}") ?>" class="btn waves-effect green">Update</a>
                         <button data-value="<?= $account->id ?>" onclick="deleteAccount(event)" class="btn waves-effect red">Delete</button>
                     </td>
                 </tr>
@@ -49,4 +49,8 @@
             window.location.href = `/account/delete/${$(e.target).attr('data-value')}`;
         }
     }
+
+    <?php if($this->session->flashdata('message')): ?>
+    M.toast({html: '<?= $this->session->flashdata('message') ?>', classes: 'rounded'});
+    <?php endif ?>
 </script>

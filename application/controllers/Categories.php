@@ -14,7 +14,7 @@ class Categories extends CI_Controller
             array(
                 'field' => 'name',
                 'label' => 'Name',
-                'rules' => 'required|regex_match[/[a-zA-Z ]+/]}|is_unique[categories.name]',
+                'rules' => 'required|regex_match[/[a-zA-Z ]+/]|is_unique[categories.name]',
             ),
         );
 
