@@ -15,10 +15,11 @@ class Inventory extends CI_Controller
         }
 
         $data['user'] = $this->session->userdata('user');
+        $data['books'] = $this->books->get_all();
 
         $this->load->view('partials/header');
         $this->load->view('partials/sidebar', $data);
-        $this->load->view('inventory/index');
+        $this->load->view('inventory/index', $data);
         $this->load->view('partials/footer');
     }
 }

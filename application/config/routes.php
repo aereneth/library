@@ -59,6 +59,7 @@ $route['migrate'] = 'Migrate/index';
 
 $route['api/category/(:any)'] = 'Categories/$1';
 $route['api/book/(:any)'] = 'Books/$1';
+$route['api/copy/(:any)'] = 'Copies/$1';
 
 $route['acquisition/(:any)'] = 'Acquisition/$1';
 $route['acquisition'] = 'Acquisition/index';
