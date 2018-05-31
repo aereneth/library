@@ -174,7 +174,7 @@ class Books extends CI_Controller
 
     public function get_all()
     {
-        echo json_encode($this->books->with('category')->get_all());
+        echo json_encode($this->books->with('category')->with('copies')->get_all());
     }
 
     public function delete()

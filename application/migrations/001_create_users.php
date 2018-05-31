@@ -68,7 +68,7 @@ class Migration_Create_users extends CI_Migration {
             'address' => 'none',
             'privilege' => 0,
             'verified' => TRUE,
-            'password' => password_hash('password', PASSWORD_BCRYPT),
+            'password' => password_hash('password', PASSWORD_DEFAULT),
         ));
     }
 

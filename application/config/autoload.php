@@ -142,5 +142,6 @@ $autoload['model'] = array(
     'user_model' => 'users',
     'book_model' => 'books',
     'category_model' => 'categories',
+    'copy_model' => 'copies',
     'reservation_model' => 'reservations',
 );

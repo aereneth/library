@@ -64,7 +64,7 @@ class Account extends CI_Controller
                     'contact_number' => $this->input->post('contact_number'),
                     'address' => $this->input->post('address'),
                     'privilege' => $this->input->post('privilege'),
-                    'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
+                    'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
                 ));
 
                 $this->session->set_flashdata(array('message' => 'Account successfully created'));
@@ -124,7 +124,6 @@ class Account extends CI_Controller
                     'contact_number' => $this->input->post('contact_number'),
                     'address' => $this->input->post('address'),
                     'privilege' => $this->input->post('privilege'),
-                    'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
                 ));
 
                 $this->session->set_flashdata(array('message' => 'Account successfully updated'));
