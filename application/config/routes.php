@@ -64,6 +64,9 @@ $route['api/copy/(:any)'] = 'Copies/$1';
 $route['acquisition/(:any)'] = 'Acquisition/$1';
 $route['acquisition'] = 'Acquisition/index';
 
+$route['reservation/(:any)'] = 'Reservation/$1';
+$route['reservation'] = 'Reservation/index';
+
 $route['inventory/(:any)'] = 'Inventory/$1';
 $route['inventory'] = 'Inventory/index';
 

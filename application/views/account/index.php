@@ -3,6 +3,7 @@
     <br>
     <div class="card-panel">
         <a href="<?= base_url('account/create') ?>" class="btn waves-effect waves-light blue"><i class="material-icons left">add</i>Add Account</a>
+        <br>
         <table class="striped highlight responsive-table">
             <thead>
                 <tr>

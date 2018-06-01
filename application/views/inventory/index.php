@@ -2,9 +2,6 @@
     <h3 class="blue-text text-darken-1 center-align">Inventory</h3>
     <br>
     <div class="card-panel">
-        <button class="btn waves-effect waves-light blue modal-trigger" data-target="copyModal"><i class="material-icons left">file_copy</i>Make a copy</button>
-        <br>
-        <br>
         <table id="inventoryTable" class="striped responsive-table highlight">
             <thead>
                 <tr>
