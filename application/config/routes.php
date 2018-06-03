@@ -67,6 +67,9 @@ $route['acquisition'] = 'Acquisition/index';
 $route['reservation/(:any)'] = 'Reservation/$1';
 $route['reservation'] = 'Reservation/index';
 
+$route['shelf/(:any)'] = 'Shelf/$1';
+$route['shelf'] = 'Shelf/index';
+
 $route['inventory/(:any)'] = 'Inventory/$1';
 $route['inventory'] = 'Inventory/index';
 

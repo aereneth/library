@@ -16,8 +16,6 @@
 					<th>Publisher</th>
 					<th>Publication Year</th>
 					<th>Edition</th>
-					<th>Acquisition Date</th>
-					<th>Recent Update Date</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
@@ -27,13 +25,13 @@
 </div>
 
 <div id="bookModal" class="modal modal-fixed-footer">
-	<form id="submitBookForm" method="post" onsubmit="submitBook(event)">
+	<form id="submitBookForm" method="post" onsubmit="submitBook(event)" enctype="multipart/form-data">
 		<input type="hidden" id="actionField">
 		<input type="hidden" name="id" id="idField">
 		<div class="modal-content">
 			<h5 id="bookModalLabel" class="blue-text">Add/Update Book</h5>
 			<div class="row">
-				<div class="input-field col s12">
+				<div id="isbnInput" class="input-field col s12">
 					<input id="isbnField" type="text" class="validate" name="isbn" required>
 					<label for="isbnField">ISBN</label>
 				</div>
@@ -73,6 +71,15 @@
 					<input id="editionField" type="text" class="validate" name="edition">
 					<label for="editionField">Edition</label>
 				</div>
+				<div class="file-field input-field col s12">
+					<div class="btn">
+						<span>Book Cover</span>
+						<input id="coverField" name="cover" type="file">
+					</div>
+					<div class="file-path-wrapper">
+						<input class="file-path validate" type="text">
+					</div>
+				</div>
 				<div class="input-field col s12" required>
 					<textarea name="description" id="descriptionField" class="materialize-textarea" cols="80" rows="10"></textarea>
 					<label for="descriptionField">Description</label>
@@ -80,7 +87,7 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="submit" class="waves-effect waves-green btn-flat">Save</button>
+			<button id="bookSubmitButton" type="submit" class="waves-effect waves-green btn-flat">Save</button>
 			<button class="modal-close waves-effect waves-red btn-flat">Cancel</button>
 		</div>
 	</form>
@@ -153,8 +160,6 @@
 			{data: 'publisher'},
 			{data: 'publication_year'},
 			{data: 'edition'},
-			{data: 'acquisition_date'},
-			{data: 'recent_update_date'},
 			{
 				data: 'id',
 				render: function(data, type, row) {
@@ -168,7 +173,7 @@
 	function openAddBookModal(e) {
 		var modal = $('#bookModal');
 
-		$('#isbnField').prop('disabled', false);
+		$('#isbnInput').show();
 
 		$('#bookModalLabel').html('Add Modal');
 
@@ -180,7 +185,7 @@
 	function openUpdateBookModal(e) {
 		var modal = $('#bookModal');
 
-		$('#isbnField').prop('disabled', true);
+		$('#isbnInput').hide();
 
 		$('#bookModalLabel').html('Update Modal');
 
@@ -225,31 +230,43 @@
 	}
 
 	function submitBook(e) {
+		$('#bookSubmitButton').prop('disabled', true);
+
 		if($(e.target).find('input#actionField').val() == 'add') {
 			$.ajax({
 				url: 'api/book/add',
 				type: 'post',
-				data: $(e.target).serializeArray()
+				enctype: 'multipart/form-data',
+				contentType: false,
+				processData: false,
+				data: new FormData($(e.target)[0]),
 			}).done(function(data) {
 				$(e.target)[0].reset();
 				bookTable.ajax.reload();
 				$('#bookModal').modal('close');
 				M.toast({html: 'Book added', classes: 'rounded'});
+				$('#bookSubmitButton').prop('disabled', false);
 			}).fail(function(data) {
 				M.toast({html: data['responseText'], classes: 'rounded'});
+				$('#bookSubmitButton').prop('disabled', false);
 			});
 		} else if($(e.target).find('input#actionField').val() == 'update') {
 			$.ajax({
 				url: 'api/book/update',
 				type: 'post',
-				data: $(e.target).serializeArray()
+				enctype: 'multipart/form-data',
+				contentType: false,
+				processData: false,
+				data: new FormData($(e.target)[0]),
 			}).done(function(data) {
 				$(e.target)[0].reset();
 				bookTable.ajax.reload();
 				$('#bookModal').modal('close');
 				M.toast({html: 'Book updated', classes: 'rounded'});
+				$('#bookSubmitButton').prop('disabled', false);
 			}).fail(function(data) {
 				M.toast({html: data['responseText'], classes: 'rounded'});
+				$('#bookSubmitButton').prop('disabled', false);
 			});
 		}
 
