@@ -24,11 +24,19 @@
             <a href="#email"><span class="white-text email"><?= $user->email_address ?></span></a>
         </div>
     </li>
+    <li><a href="<?= base_url() ?>" class="waves-effect"><i class="material-icons">home</i>Home</a></li>
+    <li><div class="divider"></div></li>
     <?php if($user->privilege <= 2): ?>
     <li><a class="subheader">Library</a></li>
     <li><a href="<?= base_url('acquisition') ?>" class="waves-effect"><i class="material-icons">add_box</i>Acquisition</a></li>
     <li><a href="#!" class="waves-effect"><i class="material-icons">autorenew</i>Circulation</a></li>
     <li><a href="<?= base_url('inventory') ?>" class="waves-effect"><i class="material-icons">create</i>Inventory</a></li>
+    <li><div class="divider"></div></li>
+    <?php endif ?>
+    <?php if($user->privilege  == 3): ?>
+    <li><a class="subheader">Reservation</a></li>
+    <li><a href="<?= base_url('reservation') ?>" class="waves-effect"><i class="material-icons">book</i>Borrow Book</a></li>
+    <li><a href="<?= base_url('reservation/history') ?>" class="waves-effect"><i class="material-icons">history</i>History</a></li>
     <li><div class="divider"></div></li>
     <?php endif ?>
     <li><a class="subheader">Catalog</a></li>

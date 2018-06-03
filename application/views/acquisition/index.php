@@ -168,6 +168,8 @@
 	function openAddBookModal(e) {
 		var modal = $('#bookModal');
 
+		$('#isbnField').prop('disabled', false);
+
 		$('#bookModalLabel').html('Add Modal');
 
 		$('form#submitBookForm')[0].reset();
@@ -177,6 +179,8 @@
 	
 	function openUpdateBookModal(e) {
 		var modal = $('#bookModal');
+
+		$('#isbnField').prop('disabled', true);
 
 		$('#bookModalLabel').html('Update Modal');
 

@@ -10,7 +10,14 @@ class Catalog extends CI_Controller
 
     public function index()
     {
+        
         $this->load->view('partials/header');
+        
+        if($this->session->userdata('user') != NULL) {
+            $data['user'] = $this->session->userdata('user');
+            $this->load->view('partials/sidebar', $data);
+        }
+
         $this->load->view('catalog/index');
         $this->load->view('partials/footer');
     }
