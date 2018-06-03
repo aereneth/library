@@ -67,6 +67,14 @@ class Books extends CI_Controller
         $this->form_validation->set_error_delimiters('', '<br>');
 
         if($this->form_validation->run()) {
+            if($_FILES['cover']['tmp_name'] != NULL) {
+                $this->load->library('cloudinarylib');
+    
+                $book_cover = \Cloudinary\Uploader::upload($_FILES['cover']['tmp_name'], array(
+                    'public_id' => $this->input->post('isbn'),
+                ));
+            }
+
             http_response_code(200);
             echo $this->books->insert(array(
                 'isbn' => $this->input->post('isbn'),
@@ -81,6 +89,7 @@ class Books extends CI_Controller
                 'description' => $this->input->post('description'),
                 'acquisition_date' => (new DateTime('NOW', new DateTimeZone('Asia/Manila')))->format('c'),
                 'recent_update_date' => (new DateTime('NOW', new DateTimeZone('Asia/Manila')))->format('c'),
+                'image_url' => $book_cover['url'] ?? NULL,
             ));
         } else {
             http_response_code(400);
@@ -142,7 +151,6 @@ class Books extends CI_Controller
         $this->form_validation->set_error_delimiters('', '<br>');
 
         if($this->form_validation->run()) {
-            http_response_code(200);
             $this->books->update($this->input->post('id'), array(
                 'title' => $this->input->post('title'),
                 'other_title' => $this->input->post('other_title'),
@@ -155,6 +163,20 @@ class Books extends CI_Controller
                 'description' => $this->input->post('description'),
                 'recent_update_date' => (new DateTime('NOW', new DateTimeZone('Asia/Manila')))->format('c'),
             ));
+            
+            if($_FILES['cover']['tmp_name'] != NULL) {
+                $this->load->library('cloudinarylib');
+    
+                $book_cover = \Cloudinary\Uploader::upload($_FILES['cover']['tmp_name'], array(
+                    'public_id' => $this->input->post('isbn'),
+                ));
+
+                $this->books->update($this->input->post('id'), array(
+                    'image_url' => $book_cover['url'] ?? NULL,
+                ));
+            }
+            
+            http_response_code(200);
         } else {
             http_response_code(400);
             echo validation_errors();

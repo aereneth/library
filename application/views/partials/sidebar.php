@@ -2,6 +2,9 @@
     <div class="nav-wrapper">
         <a id="logo-container" href="#" class="brand-logo">adInfinitum</a>
         <ul class="right hide-on-med-and-down">
+            <?php if($user->privilege == 3): ?>
+            <li><a href="#"><i class="material-icons left">shopping_cart</i>Cart</a></li>
+            <?php endif ?>
             <li>
                 <a href="#" class="dropdown-trigger" data-target="userDropdown"><?= "{$user->first_name} {$user->last_name}" ?></a>
                 <ul id="userDropdown" class="dropdown-content">
@@ -35,7 +38,8 @@
     <?php endif ?>
     <?php if($user->privilege  == 3): ?>
     <li><a class="subheader">Reservation</a></li>
-    <li><a href="<?= base_url('reservation') ?>" class="waves-effect"><i class="material-icons">book</i>Borrow Book</a></li>
+    <li><a href="<?= base_url('shelf') ?>" class="waves-effect"><i class="material-icons">book</i>View Shelf</a></li>
+    <li><a href="<?= base_url('shelf') ?>" class="waves-effect"><i class="material-icons">book</i>Borrow Books</a></li>
     <li><a href="<?= base_url('reservation/history') ?>" class="waves-effect"><i class="material-icons">history</i>History</a></li>
     <li><div class="divider"></div></li>
     <?php endif ?>
