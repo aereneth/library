@@ -19,12 +19,12 @@ class Books extends CI_Controller
             array(
                 'field' => 'title',
                 'label' => 'Title',
-                'rules' => 'required|max_length[255]|alpha_numeric_spaces',
+                'rules' => 'required|max_length[255]',
             ),
             array(
                 'field' => 'other_title',
                 'label' => 'Other Title',
-                'rules' => 'max_length[255]|alpha_numeric_spaces',
+                'rules' => 'max_length[255]',
             ),
             array(
                 'field' => 'category_id',
@@ -92,19 +92,14 @@ class Books extends CI_Controller
     {
         $config = array(
             array(
-                'field' => 'isbn',
-                'label' => 'ISBN',
-                'rules' => 'required|exact_length[5]|numeric|is_unique[books.isbn]',
-            ),
-            array(
                 'field' => 'title',
                 'label' => 'Title',
-                'rules' => 'required|max_length[255]|alpha_numeric_spaces',
+                'rules' => 'required|max_length[255]',
             ),
             array(
                 'field' => 'other_title',
                 'label' => 'Other Title',
-                'rules' => 'max_length[255]|alpha_numeric_spaces',
+                'rules' => 'max_length[255]',
             ),
             array(
                 'field' => 'category_id',
@@ -149,7 +144,6 @@ class Books extends CI_Controller
         if($this->form_validation->run()) {
             http_response_code(200);
             $this->books->update($this->input->post('id'), array(
-                'isbn' => $this->input->post('isbn'),
                 'title' => $this->input->post('title'),
                 'other_title' => $this->input->post('other_title'),
                 'category_id' => $this->input->post('category_id'),

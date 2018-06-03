@@ -44,7 +44,7 @@
     <div class="footer-copyright">
         <div class="container">
             Made by
-            <a class="white-text" href="http://materializecss.com">adInfinitum</a>
+            <a class="white-text" href="<?= base_url('/') ?>">adInfinitum</a>
         </div>
     </div>
 </footer>
