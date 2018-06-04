@@ -6,7 +6,7 @@
 		<button class="btn waves-effect blue modal-trigger" data-target="categoryModal"><i class="material-icons left">add</i>Category</button>
 		<br>
 		<br>
-		<table id="bookTable" class="hover responsive-table">
+		<table id="bookTable" class="highlight responsive-table">
 			<thead>
 				<tr>
 					<th>ISBN</th>

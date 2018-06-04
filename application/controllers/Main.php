@@ -35,6 +35,11 @@ class Main extends CI_Controller
 
             if($user && password_verify($this->input->post('password'), $user->password)) {
                 $this->session->set_userdata('user', $user);
+
+                if($user->privilege == 3) {
+                    $this->session->set_userdata('cart', array());
+                }
+
                 redirect();
             }
         }
@@ -51,6 +56,11 @@ class Main extends CI_Controller
         }
 
         $this->session->unset_userdata('user');
+
+        if($this->session->userdata('cart') != NULL) {
+            $this->session->unset_userdata('cart');
+        }
+        
         redirect('login');
     }
 

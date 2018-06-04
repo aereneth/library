@@ -2,7 +2,7 @@
     <h3 class="blue-text text-darken-1 center-align">Inventory</h3>
     <br>
     <div class="card-panel">
-        <table id="inventoryTable" class="striped responsive-table highlight">
+        <table id="inventoryTable" class="highlight responsive-table">
             <thead>
                 <tr>
 					<th>ISBN</th>
@@ -47,7 +47,8 @@
             { 
                 data: 'id',
                 render: function(data, type, row) {
-                    return `<button class="btn waves-effect waves-light blue" data-value="${data}" onclick="createCopy(event)"><i class="material-icons left">file_copy</i>Make a copy</button>`;
+                    return `<button class="btn waves-effect waves-light green" data-value="${data}" onclick="createCopy(event)">Make a copy</button>
+                    <a href="<?= base_url('inventory/view') ?>/${data}" class="btn waves-effect waves-light blue" data-value="${data}"">View copies</button>`;
                 },
             },
         ]
@@ -61,6 +62,7 @@
                 book_id: $(e.target).attr('data-value')
             },
         }).done(function() {
+            M.toast({html: 'Copy created', classes: 'rounded'});
             inventoryTable.ajax.reload();
         });
 

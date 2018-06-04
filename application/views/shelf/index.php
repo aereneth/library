@@ -12,7 +12,7 @@
                     <span class="card-title activator"><?= $book->title ?></span>
                 </div>
                 <div class="card-action">
-                    <a href="#">Borrow</a>
+                    <a href="#" onclick="borrowBook(event)" data-value="<?= $book->id ?>">Borrow</a>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title"><?= $book->title ?><i class="material-icons right">close</i></span>
@@ -23,3 +23,22 @@
         <?php endforeach ?>
     </div>
 </div>
+
+<script>
+    function borrowBook(e) {
+        $.ajax({
+            url: 'api/cart/add',
+            type: 'post',
+            data: {
+                book_id: $(e.target).attr('data-value'),
+            },
+            dataType: 'json',
+        }).done(function() {
+            M.toast({html: 'Book added to cart', classes: 'rounded'});
+        }).fail(function(data) {
+            M.toast({html: data['responseJSON']['error'], classes: 'rounded'});
+        });
+
+        e.preventDefault();
+    }
+</script>

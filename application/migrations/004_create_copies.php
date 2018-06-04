@@ -18,9 +18,8 @@ class Migration_Create_copies extends CI_Migration {
                 'unsigned' => TRUE,
             ),
             'status' => array(
-                'type' => 'VARCHAR',
-                'constraint' => '255',
-                'null' => TRUE
+                'type' => 'BOOLEAN',
+                'default' => TRUE,
             ),
             'remark' => array(
                 'type' => 'TEXT',
