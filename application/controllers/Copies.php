@@ -14,4 +14,10 @@ class Copies extends CI_Controller
             'book_id' => $this->input->post('book_id'),
         )));
     }
+
+    public function get_all()
+    {
+        http_response_code(200);
+        echo json_encode($this->copies->with('book')->with('reservations')->get_all())
+    }
 }

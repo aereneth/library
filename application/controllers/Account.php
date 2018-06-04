@@ -13,6 +13,10 @@ class Account extends CI_Controller
         if($this->session->userdata('user') == NULL) {
             redirect('/login');
         }
+        
+        if($this->session->userdata('user')->privilege > 1) {
+            redirect();
+        }
 
         $data['user'] = $this->session->userdata('user');
         $data['accounts'] = $this->users->order_by('id')->get_all();
@@ -27,6 +31,10 @@ class Account extends CI_Controller
     {
         if($this->session->userdata('user') == NULL) {
             redirect('/login');
+        }
+        
+        if($this->session->userdata('user')->privilege > 1) {
+            redirect();
         }
 
         $config = array(
@@ -87,7 +95,10 @@ class Account extends CI_Controller
         if($this->session->userdata('user') == NULL) {
             redirect('/login');
         }
-
+        
+        if($this->session->userdata('user')->privilege > 1) {
+            redirect();
+        }
 
         $config = array(
             array(
@@ -144,6 +155,10 @@ class Account extends CI_Controller
 
     public function delete($user_id)
     {
+        if($this->session->userdata('user')->privilege > 1) {
+            redirect();
+        }
+
         $this->users->delete($user_id);
         redirect('account');
     }

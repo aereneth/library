@@ -57,9 +57,11 @@ $route['migrate/(:any)/(:num)'] = 'Migrate/$1/$2';
 $route['migrate/(:any)'] = 'Migrate/$1';
 $route['migrate'] = 'Migrate/index';
 
+$route['api/reservation/(:any)'] = 'Reservation/$1';
 $route['api/category/(:any)'] = 'Categories/$1';
 $route['api/book/(:any)'] = 'Books/$1';
 $route['api/copy/(:any)'] = 'Copies/$1';
+$route['api/cart/(:any)'] = 'Cart/$1';
 
 $route['acquisition/(:any)'] = 'Acquisition/$1';
 $route['acquisition'] = 'Acquisition/index';
@@ -70,6 +72,7 @@ $route['reservation'] = 'Reservation/index';
 $route['shelf/(:any)'] = 'Shelf/$1';
 $route['shelf'] = 'Shelf/index';
 
+$route['inventory/(:any)/(:num)'] = 'Inventory/$1/$2';
 $route['inventory/(:any)'] = 'Inventory/$1';
 $route['inventory'] = 'Inventory/index';
 
@@ -77,6 +80,10 @@ $route['account/(:any)/(:num)'] = 'Account/$1/$2';
 $route['account/(:any)'] = 'Account/$1';
 $route['account'] = 'Account/index';
 
+$route['circulation'] = 'Circulation/index';
+
 $route['catalog'] = 'Catalog/index';
+
+$route['cart'] = 'Cart/index';
 
 $route['(:any)'] = 'Main/$1';
