@@ -17,31 +17,35 @@
                                 <h5 class="blue-text">Register</h5>
                             </div>
                             <div class="input-field col s12 m6">
-                                <input type="text" name="first_name" id="firstNameField" class="validate" required>
+                                <input type="text" name="first_name" id="firstNameField" class="validate" value="<?= set_value('first_name') ?>" required>
                                 <label for="firstNameField">First Name</label>
                             </div>
                             <div class="input-field col s12 m6">
-                                <input type="text" name="last_name" id="lastNameField" class="validate" required>
+                                <input type="text" name="last_name" id="lastNameField" class="validate" value="<?= set_value('last_name') ?>" required>
                                 <label for="lastNameField">Last Name</label>
                             </div>
                             <div class="input-field col s12 m6">
-                                <input type="email" name="email" id="emailField" class="validate" required>
+                                <input type="email" name="email" id="emailField" class="validate" value="<?= set_value('email') ?>" required>
                                 <label for="emailField">Email Address</label>
                             </div>
                             <div class="input-field col s12 m6">
-                                <input type="text" name="contact_number" id="contactNumberField" class="validate" maxlength="11" required>
+                                <input type="text" name="contact_number" id="contactNumberField" class="validate" value="<?= set_value('contact_number') ?>" maxlength="11" required>
                                 <label for="contactNumberField">Contact Number</label>
                             </div>
                             <div class="input-field col s12">
-                                <input type="text" name="address" id="addressField" class="validate" required>
+                                <input type="text" name="address" id="addressField" class="validate" value="<?= set_value('address') ?>" required>
                                 <label for="addressField">Address</label>
                             </div>
-                            <div class="input-field col s12">
-                                <input type="password" name="password" id="passwordField" class="validate" required>
+                            <div class="input-field col s6">
+                                <input type="password" name="password" id="passwordField" class="validate" maxlength="32" required>
                                 <label for="passwordField">Password</label>
                             </div>
+                            <div class="input-field col s6">
+                                <input type="password" name="confirm_password" id="confirmPasswordField" class="validate" maxlength="32" required>
+                                <label for="confirmPasswordField">Confirm Password</label>
+                            </div>
                             <div class="col s12">
-                                <small class="red-text text-lighten-1"><?= $errors ?? '' ?></small>
+                                <span class="red-text text-lighten-1"><?= $this->session->flashdata('errors') ?></span>
                             </div>
                             <div class="col s12">
                                 <center>
