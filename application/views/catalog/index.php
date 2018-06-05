@@ -23,6 +23,17 @@
                     <th>Edition</th>
                 </tr>
             </thead>
+            <tfoot>
+                <tr>
+                    <th>ISBN</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Publisher</th>
+                    <th>Publication Year</th>
+                    <th>Edition</th>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>
