@@ -38,6 +38,11 @@
                     </div>
                 </form>
             </div>
+            <?php if($this->session->flashdata('message')): ?>
+            <div class="card-panel">
+                <h5 class="green-text"><?= $this->session->flashdata('message') ?></h5>
+            </div>
+            <?php endif ?>
             <h5 class="center-align blue-text text-darken-1">OR</h5>
             <center>
                 <a href="<?= base_url('register') ?>" class="btn btn-large blue waves-effect waves-light">

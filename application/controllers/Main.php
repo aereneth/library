@@ -91,6 +91,21 @@ class Main extends CI_Controller
                 'label' => 'Contact Number',
                 'rules' => 'required|exact_length[11]|numeric',
             ),
+            array(
+                'field' => 'contact_number',
+                'label' => 'Contact Number',
+                'rules' => 'required|exact_length[11]|numeric',
+            ),
+            array(
+                'field' => 'password',
+                'label' => 'Password',
+                'rules' => 'required|min_length[8]|max_length[32]',
+            ),
+            array(
+                'field' => 'confirm_password',
+                'label' => 'Confirm Password',
+                'rules' => 'required|matches[password]',
+            ),
         );
 
         $this->form_validation->set_rules($config);
@@ -105,12 +120,13 @@ class Main extends CI_Controller
                     'contact_number' => $this->input->post('contact_number'),
                     'address' => $this->input->post('address'),
                     'privilege' => 3,
-                    'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
+                    'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
                 ));
 
+                $this->session->set_flashdata(array('message' => 'Registration success'));
                 redirect('login');
             } else {
-                $data['errors'] = validation_errors();
+                $this->session->set_flashdata(array('errors' => validation_errors()));
             }
         }
 
