@@ -57,10 +57,10 @@ class Migration_Create_books extends CI_Migration {
             'description' => array(
                 'type' => 'TEXT',
             ),
-            'status' => array(
+            'image_url' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '255',
-                'null' => TRUE
+                'null' => TRUE,
             ),
             'deleted' => array(
                 'type' => 'BOOLEAN',

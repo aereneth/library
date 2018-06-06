@@ -3,10 +3,10 @@
 	<br>
 	<div class="card-panel">
 		<button class="btn waves-effect blue" onclick="openAddBookModal()"><i class="material-icons left">add</i>Add Book</button>
-		<button class="btn waves-effect blue modal-trigger" data-target="addCategoryModal"><i class="material-icons left">add</i>Add Category</button>
+		<button class="btn waves-effect blue modal-trigger" data-target="categoryModal"><i class="material-icons left">add</i>Category</button>
 		<br>
 		<br>
-		<table id="bookTable" class="hover">
+		<table id="bookTable" class="highlight responsive-table">
 			<thead>
 				<tr>
 					<th>ISBN</th>
@@ -16,8 +16,6 @@
 					<th>Publisher</th>
 					<th>Publication Year</th>
 					<th>Edition</th>
-					<th>Acquisition Date</th>
-					<th>Recent Update Date</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
@@ -27,18 +25,18 @@
 </div>
 
 <div id="bookModal" class="modal modal-fixed-footer">
-	<form id="submitBookForm" method="post" onsubmit="submitBook(event)">
+	<form id="submitBookForm" method="post" onsubmit="submitBook(event)" enctype="multipart/form-data">
 		<input type="hidden" id="actionField">
 		<input type="hidden" name="id" id="idField">
 		<div class="modal-content">
-			<h4>Add/Update Book</h4>
+			<h5 id="bookModalLabel" class="blue-text">Add/Update Book</h5>
 			<div class="row">
-				<div class="input-field col s12">
-					<input id="isbnField" type="text" class="validate" name="isbn" required>
+				<div id="isbnInput" class="input-field col s12">
+					<input id="isbnField" type="text" class="validate" name="isbn" maxlength="5" required>
 					<label for="isbnField">ISBN</label>
 				</div>
 				<div class="input-field col s12">
-					<input id="titleField" type="text" class="validate" name="title">
+					<input id="titleField" type="text" class="validate" name="title" required>
 					<label for="titleField">Title</label>
 				</div>
 				<div class="input-field col s12">
@@ -50,7 +48,7 @@
 					<label for="authorField">Author</label>
 				</div>
 				<div class="input-field col s12">
-					<input id="otherAuthorField" type="text" class="validate" name="other_author" >
+					<input id="otherAuthorField" type="text" class="validate" name="other_author">
 					<label for="otherAuthorField">Other Author</label>
 				</div>
 				<div class="input-field col s12">
@@ -66,12 +64,21 @@
 					<label for="publisherField">Publisher</label>
 				</div>
 				<div class="input-field col s6">
-					<input id="yearField" type="text" class="validate" name="publication_year" maxlenght="4">
+					<input id="yearField" type="text" class="validate" name="publication_year" maxlength="4" required>
 					<label for="yearField">Publication Year</label>
 				</div>
 				<div class="input-field col s6">
 					<input id="editionField" type="text" class="validate" name="edition">
 					<label for="editionField">Edition</label>
+				</div>
+				<div class="file-field input-field col s12">
+					<div class="btn">
+						<span>Book Cover</span>
+						<input id="coverField" name="cover" type="file">
+					</div>
+					<div class="file-path-wrapper">
+						<input class="file-path validate" type="text">
+					</div>
 				</div>
 				<div class="input-field col s12" required>
 					<textarea name="description" id="descriptionField" class="materialize-textarea" cols="80" rows="10"></textarea>
@@ -80,28 +87,55 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="submit" class="waves-effect waves-green btn-flat">Save</button>
+			<button id="bookSubmitButton" type="submit" class="waves-effect waves-green btn-flat">Save</button>
 			<button class="modal-close waves-effect waves-red btn-flat">Cancel</button>
 		</div>
 	</form>
 </div>
 
-<div id="addCategoryModal" class="modal modal-fixed-footer">
-	<form id="addCategoryForm" method="post" onsubmit="addCategory(event)">
-		<div class="modal-content">
-			<h4>Add Category</h4>
+<div id="categoryModal" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<div class="row valign-wrapper">
+			<div class="col s10">
+				<h5 class="blue-text">Add Category</h5>
+			</div>
+			<div class="col s2">
+				<button type="submit" form="addCategoryForm" class="btn waves-effect green right"><i class="material-icons left">add</i>Create</button>
+			</div>
+		</div>
+		<form id="addCategoryForm" method="post" onsubmit="addCategory(event)">
 			<div class="row">
 				<div class="input-field col s12">
 					<input id="categoryNameField" type="text" class="validate" name="name" required>
 					<label for="categoryNameField">Name</label>
 				</div>
 			</div>
+		</form>
+		<div class="divider"></div>
+		<div class="row valign-wrapper">
+			<div class="col s10">
+				<h5 class="blue-text">Delete Category</h5>
+			</div>
+			<div class="col s2">
+				<button type="submit" form="deleteCategoryForm" class="btn waves-effect red right"><i class="material-icons left">delete</i>Delete</button>
+			</div>
 		</div>
-		<div class="modal-footer">
-			<button type="submit" class="waves-effect waves-green btn-flat">Save</button>
-			<button class="modal-close waves-effect waves-red btn-flat">Cancel</button>
-		</div>
-	</form>
+		<form id="deleteCategoryForm" method="post" onsubmit="deleteCategory(event)">
+			<div id="categoryRow" class="row">
+				<?php foreach($categories as $category): ?>
+				<p class="col s3">
+					<label>
+						<input type="checkbox" name="category[<?= $category->id ?>]">
+						<span><?= $category->name ?></span>
+					</label>
+				</p>
+				<?php endforeach ?>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="modal-close waves-effect waves-red btn-flat">Close</button>
+	</div>
 </div>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.css"/>
@@ -126,8 +160,6 @@
 			{data: 'publisher'},
 			{data: 'publication_year'},
 			{data: 'edition'},
-			{data: 'acquisition_date'},
-			{data: 'recent_update_date'},
 			{
 				data: 'id',
 				render: function(data, type, row) {
@@ -141,6 +173,10 @@
 	function openAddBookModal(e) {
 		var modal = $('#bookModal');
 
+		$('#isbnInput').show();
+
+		$('#bookModalLabel').html('Add Modal');
+
 		$('form#submitBookForm')[0].reset();
 		$('form#submitBookForm input#actionField').val('add');
 		modal.modal('open');
@@ -148,6 +184,10 @@
 	
 	function openUpdateBookModal(e) {
 		var modal = $('#bookModal');
+
+		$('#isbnInput').hide();
+
+		$('#bookModalLabel').html('Update Modal');
 
 		$('form#submitBookForm')[0].reset();
 		$('form#submitBookForm input#actionField').val('update');
@@ -171,69 +211,64 @@
 			modal.find('input#yearField').val(book['publication_year']);
 			modal.find('input#editionField').val(book['edition']);
 			modal.find('textarea#descriptionField').val(book['description']);
-			M.textareaAutoResize($('textarea#descriptionField'));
+
+			M.updateTextFields(modal.find('input#idField'));
+			M.updateTextFields(modal.find('input#isbnField'));
+			M.updateTextFields(modal.find('input#titleField'));
+			M.updateTextFields(modal.find('input#otherTitleField'));
+			M.updateTextFields(modal.find('select#categoryField'));
+			M.updateTextFields(modal.find('input#authorField'));
+			M.updateTextFields(modal.find('input#otherAuthorField'));
+			M.updateTextFields(modal.find('input#publisherField'));
+			M.updateTextFields(modal.find('input#yearField'));
+			M.updateTextFields(modal.find('input#editionField'));
+			M.updateTextFields(modal.find('input#descriptionField'));
+			M.textareaAutoResize(modal.find('textarea#descriptionField'));
 		});
 
 		modal.modal('open');
 	}
 
 	function submitBook(e) {
+		$('#bookSubmitButton').prop('disabled', true);
+
 		if($(e.target).find('input#actionField').val() == 'add') {
 			$.ajax({
 				url: 'api/book/add',
 				type: 'post',
-				data: $(e.target).serializeArray()
+				enctype: 'multipart/form-data',
+				contentType: false,
+				processData: false,
+				data: new FormData($(e.target)[0]),
 			}).done(function(data) {
 				$(e.target)[0].reset();
 				bookTable.ajax.reload();
 				$('#bookModal').modal('close');
 				M.toast({html: 'Book added', classes: 'rounded'});
+				$('#bookSubmitButton').prop('disabled', false);
 			}).fail(function(data) {
 				M.toast({html: data['responseText'], classes: 'rounded'});
+				$('#bookSubmitButton').prop('disabled', false);
 			});
 		} else if($(e.target).find('input#actionField').val() == 'update') {
 			$.ajax({
 				url: 'api/book/update',
 				type: 'post',
-				data: $(e.target).serializeArray()
+				enctype: 'multipart/form-data',
+				contentType: false,
+				processData: false,
+				data: new FormData($(e.target)[0]),
 			}).done(function(data) {
 				$(e.target)[0].reset();
 				bookTable.ajax.reload();
 				$('#bookModal').modal('close');
-				M.toast({html: 'Book added', classes: 'rounded'});
+				M.toast({html: 'Book updated', classes: 'rounded'});
+				$('#bookSubmitButton').prop('disabled', false);
 			}).fail(function(data) {
 				M.toast({html: data['responseText'], classes: 'rounded'});
+				$('#bookSubmitButton').prop('disabled', false);
 			});
 		}
-
-		e.preventDefault();
-	}
-
-	function addCategory(e) {
-		$.ajax({
-			url: 'api/category/add',
-			type: 'post',
-			data: $(e.target).serializeArray()
-		}).done(function(data) {
-			$('form#submitBookForm select#categoryField').html('');
-
-			$.ajax({
-				url: 'api/category/get_all',
-				type: 'get',
-				dataType: 'json',
-			}).done(function(data) {
-				for(var i = 0; i < data.length; i++) {
-					$('form#submitBookForm select#categoryField').append(`<option value="${data[i]['id']}">${data[i]['name']}</option>`);
-				}
-				$('form#submitBookForm select#categoryField').formSelect();
-			});
-
-			$(e.target)[0].reset();
-			M.toast({html: 'Category added', classes: 'rounded'});
-			$('#addCategoryModal').modal('close');
-		}).fail(function(data) {
-			M.toast({html: data['responseText'], classes: 'rounded'});
-		});
 
 		e.preventDefault();
 	}
@@ -255,5 +290,73 @@
 		});
 
 		e.preventDefault();
+	}
+
+	function addCategory(e) {
+		$(e.target).find('input#categoryNameField').val(titleCase($(e.target).find('input#categoryNameField').val()));
+
+		$.ajax({
+			url: 'api/category/add',
+			type: 'post',
+			data: $(e.target).serializeArray()
+		}).done(function(data) {
+			reloadCategories();
+
+			$(e.target)[0].reset();
+			M.toast({html: 'Category added', classes: 'rounded'});
+		}).fail(function(data) {
+			M.toast({html: data['responseText'], classes: 'rounded'});
+		});
+
+		e.preventDefault();
+	}
+
+	function deleteCategory(e) {
+		if(!confirm('Are you sure you want to delete these categories?')) {
+			return;
+		}
+
+		$.ajax({
+			url: 'api/category/delete',
+			type: 'post',
+			data: $(e.target).serializeArray(),
+		}).done(function() {
+			reloadCategories();	
+			M.toast({html: 'Category deleted', classes: 'rounded'});
+		}).fail(function(data) {
+			M.toast({html: data['responseText'], classes: 'rounded'});
+		});
+
+		e.preventDefault();
+	}
+
+	function titleCase(str) {
+		return str.toLowerCase().split(' ').map(function(word) {
+			return (word.charAt(0).toUpperCase() + word.slice(1));
+		}).join(' ');
+	}
+
+	function reloadCategories() {
+		$('form#submitBookForm select#categoryField').html('');
+		$('#categoryRow').html('');
+
+		$.ajax({
+			url: 'api/category/get_all',
+			type: 'get',
+			dataType: 'json',
+		}).done(function(data) {
+			for(var i = 0; i < data.length; i++) {
+				$('#categoryRow').append(`
+				<p class="col s3">
+					<label>
+						<input type="checkbox" name="category[${data[i]['id']}]">
+						<span>${data[i]['name']}</span>
+					</label>
+				</p>
+				`);
+				$('form#submitBookForm select#categoryField').append(`<option value="${data[i]['id']}">${data[i]['name']}</option>`);
+			}
+			$('form#submitBookForm select#categoryField').formSelect();
+		});
 	}
 </script>

@@ -13,9 +13,13 @@ class Acquisition extends CI_Controller
         if($this->session->userdata('user') == NULL) {
             redirect('/login');
         }
+        
+        if($this->session->userdata('user')->privilege > 2) {
+            redirect();
+        }
 
         $data['user'] = $this->session->userdata('user');
-        $data['categories'] = $this->categories->get_all();
+        $data['categories'] = $this->categories->order_by('name')->get_all();
         $data['books'] = $this->books->with('category')->get_all();
 
         $this->load->view('partials/header');

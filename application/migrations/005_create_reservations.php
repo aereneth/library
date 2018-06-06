@@ -17,6 +17,11 @@ class Migration_Create_reservations extends CI_Migration {
                 'constraint' => 5,
                 'unsigned' => TRUE,
             ),
+            'copy_id' => array(
+                'type' => 'INT',
+                'constraint' => 5,
+                'unsigned' => TRUE,
+            ),
             'book_id' => array(
                 'type' => 'INT',
                 'constraint' => 5,
@@ -25,26 +30,26 @@ class Migration_Create_reservations extends CI_Migration {
             'reservation_date' => array(
                 'type' => 'TIMESTAMP',
             ),
+            'borrow_date' => array(
+                'type' => 'TIMESTAMP',
+                'null' => TRUE,
+            ),
             'due_date' => array(
                 'type' => 'TIMESTAMP',
+                'null' => TRUE,
             ),
             'return_date' => array(
                 'type' => 'TIMESTAMP',
                 'null' => TRUE
             ),
-            'reservation_days' => array(
-                'type' => 'int',
-                'constraint' => 5,
-                'default' => 0,
-            ),
-            'fine' => array(
+            'overdue_fine' => array(
                 'type' => 'DECIMAL',
                 'default' => 0,
             ),
             'status' => array(
-                'type' => 'VARCHAR',
-                'constraint' => '255',
-                'null' => TRUE
+                'type' => 'INT',
+                'unsigned' => TRUE,
+                'default' => 0
             ),
             'remark' => array(
                 'type' => 'VARCHAR',
@@ -55,6 +60,7 @@ class Migration_Create_reservations extends CI_Migration {
                 'type' => 'BOOLEAN',
                 'default' => FALSE,
             ),
+            'CONSTRAINT fk_reservations_copy FOREIGN KEY (copy_id) REFERENCES copies(id)',
             'CONSTRAINT fk_reservations_book FOREIGN KEY (book_id) REFERENCES books(id)',
             'CONSTRAINT fk_reservations_user FOREIGN KEY (user_id) REFERENCES users(id)',
         ));

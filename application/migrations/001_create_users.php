@@ -23,6 +23,7 @@ class Migration_Create_users extends CI_Migration {
             'middle_name' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '255',
+                'null' => TRUE,
             ),
             'email_address' => array(
                 'type' => 'VARCHAR',
@@ -36,6 +37,15 @@ class Migration_Create_users extends CI_Migration {
             'address' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '255',
+                'null' => TRUE,
+            ),
+            'privilege' => array(
+                'type' => 'INT',
+                'unsigned' => TRUE,
+            ),
+            'verified' => array(
+                'type' => 'BOOLEAN',
+                'default' => FALSE,
             ),
             'password' => array(
                 'type' => 'VARCHAR',
@@ -56,7 +66,9 @@ class Migration_Create_users extends CI_Migration {
             'email_address' => 'admin@gmail.com',
             'contact_number' => '00000000000',
             'address' => 'none',
-            'password' => password_hash('password', PASSWORD_BCRYPT),
+            'privilege' => 0,
+            'verified' => TRUE,
+            'password' => password_hash('password', PASSWORD_DEFAULT),
         ));
     }
 

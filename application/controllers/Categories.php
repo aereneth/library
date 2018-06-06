@@ -14,7 +14,7 @@ class Categories extends CI_Controller
             array(
                 'field' => 'name',
                 'label' => 'Name',
-                'rules' => 'required|regex_match[/[a-zA-Z ]+/]}|is_unique[categories.name]',
+                'rules' => 'required|regex_match[/^[a-zA-Z ]+$/]|is_unique[categories.name]',
             ),
         );
 
@@ -30,6 +30,23 @@ class Categories extends CI_Controller
             http_response_code(400);
             echo validation_errors();            
         }
+    }
+
+    public function delete()
+    {
+        $categories = array();
+
+        foreach($this->input->post('category') as $index => $category) {
+            if($this->books->get_many_by(array('category_id' => $index))) {
+                http_response_code(400);
+                echo 'Category is still used';
+                return;
+            }
+            array_push($categories, $index);
+        }
+
+        http_response_code(200);
+        $this->categories->delete_many($categories);
     }
 
     public function get_all()
