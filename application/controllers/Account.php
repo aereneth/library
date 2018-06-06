@@ -41,12 +41,12 @@ class Account extends CI_Controller
             array(
                 'field' => 'first_name',
                 'label' => 'First Name',
-                'rules' => 'required|regex_match[/[a-zA-Z ]+/]',
+                'rules' => 'required|regex_match[/^[a-zA-Z ]+$/]',
             ),
             array(
                 'field' => 'last_name',
                 'label' => 'Last Name',
-                'rules' => 'required|regex_match[/[a-zA-Z ]+/]',
+                'rules' => 'required|regex_match[/^[a-zA-Z ]+$/]',
             ),
             array(
                 'field' => 'email',
@@ -57,6 +57,16 @@ class Account extends CI_Controller
                 'field' => 'contact_number',
                 'label' => 'Contact Number',
                 'rules' => 'required|exact_length[11]|numeric',
+            ),
+            array(
+                'field' => 'password',
+                'label' => 'Password',
+                'rules' => 'required|min_length[8]|max_length[32]',
+            ),
+            array(
+                'field' => 'confirm_password',
+                'label' => 'Confirm Password',
+                'rules' => 'required|matches[password]',
             ),
         );
 

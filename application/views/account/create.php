@@ -26,7 +26,7 @@
                         <input type="text" name="address" id="addressField" class="validate" required>
                         <label for="addressField">Address</label>
                     </div>
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s12">
                         <select name="privilege" id="privilegeField">
                             <option value="1">Admin</option>
                             <option value="2">Staff</option>
@@ -35,8 +35,12 @@
                         <label for="privilegeField">Privilege</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <input type="password" name="password" id="passwordField" class="validate" required>
+                        <input type="password" name="password" id="passwordField" class="validate" maxlength="32" required>
                         <label for="passwordField">Password</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input type="password" name="confirm_password" id="confirmPasswordField" class="validate" maxlength="32" required>
+                        <label for="confirmPasswordField">Confirm Password</label>
                     </div>
                 </div>
                 <small class="red-text text-lighten-1"><?= $errors ?? '' ?></small>

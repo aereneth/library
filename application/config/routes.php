@@ -86,4 +86,6 @@ $route['catalog'] = 'Catalog/index';
 
 $route['cart'] = 'Cart/index';
 
+$route['settings'] = 'Settings/index';
+
 $route['(:any)'] = 'Main/$1';
