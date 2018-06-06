@@ -32,7 +32,7 @@
 			<h5 id="bookModalLabel" class="blue-text">Add/Update Book</h5>
 			<div class="row">
 				<div id="isbnInput" class="input-field col s12">
-					<input id="isbnField" type="text" class="validate" name="isbn" required>
+					<input id="isbnField" type="text" class="validate" name="isbn" maxlength="5" required>
 					<label for="isbnField">ISBN</label>
 				</div>
 				<div class="input-field col s12">

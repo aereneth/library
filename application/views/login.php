@@ -23,7 +23,7 @@
                             </div>
                             <div class="input-field col s12">
                                 <div class="material-icons prefix">lock</div>
-                                <input id="passwordField" type="password" class="validate" name="password" required>
+                                <input id="passwordField" type="password" class="validate" name="password" maxlength="32" required>
                                 <label for="passwordField">Password</label>
                             </div>
                             <div class="col s12">
@@ -39,8 +39,13 @@
                 </form>
             </div>
             <?php if($this->session->flashdata('message')): ?>
-            <div class="card-panel">
-                <h5 class="green-text"><?= $this->session->flashdata('message') ?></h5>
+            <div class="card-panel green">
+                <p class="white-text"><?= $this->session->flashdata('message') ?? '' ?></p>
+            </div>
+            <?php endif ?>
+            <?php if($this->session->flashdata('errors')): ?>
+            <div class="card-panel red">
+                <p class="white-text"><?= $this->session->flashdata('errors') ?></p>
             </div>
             <?php endif ?>
             <h5 class="center-align blue-text text-darken-1">OR</h5>

@@ -74,10 +74,12 @@ class Reservation extends CI_Controller
             'status' => FALSE,
         ));
 
+        $borrow_days = $this->settings->get_by(array('name' => 'borrow_duration'))->value;
+
         $this->reservations->update($this->input->post('reservation_id'), array(
             'status' => 1,
             'borrow_date' => (new DateTime('NOW', new DateTimeZone('Asia/Manila')))->format('c'),
-            'due_date' => (new DateTime('NOW', new DateTimeZone('Asia/Manila')))->add(new DateInterval('P5D'))->format('c'),
+            'due_date' => (new DateTime('NOW', new DateTimeZone('Asia/Manila')))->add(new DateInterval("P{$borrow_days}D"))->format('c'),
         ));
 
         http_response_code(200);
@@ -103,10 +105,11 @@ class Reservation extends CI_Controller
         $return_date = (new DateTime('NOW', new DateTimeZone('Asia/Manila')));
         $overdue_days = $borrow_date->diff($return_date)->days;
         $overdue_fine = 0;
+        $overdue_rate = $this->settings->get_by(array('name' => 'overdue_rate'))->value;
         $message = 'Book returned';
 
         if($overdue_days > 0) {
-            $overdue_fine = 20 * $overdue_days;
+            $overdue_fine = $overdue_rate * $overdue_days;
             $message = "Book returned with an overdue fine of P {$overdue_fine}";
         }
 

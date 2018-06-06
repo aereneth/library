@@ -52,5 +52,10 @@
     <li><a href="<?= base_url('account') ?>" class="waves-effect"><i class="material-icons">people</i>Manage Account</a></li>
     <li><div class="divider"></div></li>
     <?php endif ?>
+    <?php if($user->privilege <= 2): ?>
+    <li><a class="subheader">Settings</a></li>
+    <li><a href="<?= base_url('settings') ?>" class="waves-effect"><i class="material-icons">settings</i>Settings</a></li>
+    <li><div class="divider"></div></li>
+    <?php endif ?>
     <li><a class="waves-effect" href="<?= base_url('/logout') ?>"><i class="material-icons">exit_to_app</i>Logout</a></li>
 </ul>

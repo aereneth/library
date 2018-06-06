@@ -34,17 +34,17 @@ class Books extends CI_Controller
             array(
                 'field' => 'author',
                 'label' => 'Author',
-                'rules' => 'required|max_length[255]|alpha_numeric_spaces',
+                'rules' => 'required|max_length[255]|regex_match[/^[a-zA-Z0-9.,\- ]+$/]',
             ),
             array(
                 'field' => 'other_author',
                 'label' => 'Other Author',
-                'rules' => 'max_length[255]|alpha_numeric_spaces',
+                'rules' => 'max_length[255]|regex_match[/^[a-zA-Z0-9.,\- ]+$/]',
             ),
             array(
                 'field' => 'publisher',
                 'label' => 'Publisher',
-                'rules' => 'required|max_length[255]|alpha_numeric_spaces',
+                'rules' => 'required|max_length[255]|regex_match[/^[a-zA-Z0-9.,\- ]+$/]',
             ),
             array(
                 'field' => 'publication_year',
@@ -118,17 +118,17 @@ class Books extends CI_Controller
             array(
                 'field' => 'author',
                 'label' => 'Author',
-                'rules' => 'required|max_length[255]|alpha_numeric_spaces',
+                'rules' => 'required|max_length[255]|regex_match[/^[a-zA-Z0-9.,\- ]+$/]',
             ),
             array(
                 'field' => 'other_author',
                 'label' => 'Other Author',
-                'rules' => 'max_length[255]|alpha_numeric_spaces',
+                'rules' => 'max_length[255]|regex_match[/^[a-zA-Z0-9.,\- ]+$/]',
             ),
             array(
                 'field' => 'publisher',
                 'label' => 'Publisher',
-                'rules' => 'required|max_length[255]|alpha_numeric_spaces',
+                'rules' => 'required|max_length[255]|regex_match[/^[a-zA-Z0-9.,\- ]+$/]',
             ),
             array(
                 'field' => 'publication_year',

@@ -41,6 +41,8 @@ class Main extends CI_Controller
                 }
 
                 redirect();
+            } else {
+                $this->session->set_flashdata('errors', 'Invalid username and password');
             }
         }
 

@@ -10,6 +10,7 @@
                     <th>Borrower's Name</th>
                     <th>Reservation Date</th>
                     <th>Due Date</th>
+                    <th>Overdue Fine</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -53,6 +54,7 @@
                     }
                 },
             },
+            { data: 'overdue_fine' },
             {
                 data: 'status',
                 render: function(data, type, row) {
