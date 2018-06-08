@@ -8,9 +8,9 @@
                 <div class="card-image waves-effect waves-block waves-light">
                     <img src="<?= $book->image_url ?>" class="activator" alt="">
                 </div>
-                <div class="card-content">
+                <!-- <div class="card-content">
                     <span class="card-title activator"><?= $book->title ?></span>
-                </div>
+                </div> -->
                 <div class="card-action">
                     <a href="#" onclick="borrowBook(event)" data-value="<?= $book->id ?>">Borrow</a>
                 </div>
