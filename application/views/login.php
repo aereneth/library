@@ -32,6 +32,7 @@
                                         Login
                                         <i class="material-icons right">send</i>
                                     </button>
+                                    <a href="<?= base_url('reset') ?>" class="btn blue waves-effect waves-light"><i class="material-icons left">help</i>Forgot Password</a>
                                 </center>
                             </div>
                         </div>
