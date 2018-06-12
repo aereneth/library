@@ -136,4 +136,50 @@ class Main extends CI_Controller
         $this->load->view('register');
         $this->load->view('partials/footer');        
     }
+
+    public function reset()
+    {
+        if($this->session->userdata('user') != NULL) {
+            redirect();
+        }
+
+        $config = array(
+            array(
+                'field' => 'password',
+                'label' => 'Password',
+                'rules' => 'required|min_length[8]|max_length[32]',
+            ),
+            array(
+                'field' => 'confirm_password',
+                'label' => 'Confirm Password',
+                'rules' => 'required|matches[password]',
+            ),
+        );
+
+        $this->form_validation->set_rules($config);
+        $this->form_validation->set_error_delimiters('','<br>');
+
+        if($this->input->server('REQUEST_METHOD') == 'POST') {
+            $user = $this->users->get_by(array(
+                'email_address' => $this->input->post('email')
+            ));
+
+            if(!$this->form_validation->run()) {
+                $this->session->set_flashdata(array('errors' => validation_errors()));
+            } else if(!$user) {
+                $this->session->set_flashdata(array('errors' => 'Invalid email address'));
+            } else {
+                $this->users->update($user->id, array(
+                    'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                ));
+
+                $this->session->set_flashdata(array('message' => 'Password successfully changed'));
+                redirect('login');
+            }
+        }
+
+        $this->load->view('partials/header');
+        $this->load->view('reset');
+        $this->load->view('partials/footer');
+    }
 }
