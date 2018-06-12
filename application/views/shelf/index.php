@@ -2,15 +2,15 @@
     <h3 class="blue-text text-darken-1 center-align">Shelf</h3>
     <br>
     <div class="row">
-        <?php foreach($books as $book): ?>
+        <?php foreach($books as $index => $book): ?>
         <div class="col s3">
             <div class="card sticky-action">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img src="<?= $book->image_url ?>" class="activator" alt="">
                 </div>
-                <div class="card-content">
+                <!-- <div class="card-content">
                     <span class="card-title activator"><?= $book->title ?></span>
-                </div>
+                </div> -->
                 <div class="card-action">
                     <a href="#" onclick="borrowBook(event)" data-value="<?= $book->id ?>">Borrow</a>
                 </div>
@@ -20,6 +20,9 @@
                 </div>
             </div>
         </div>
+        <?php if($index % 4 == 3): ?>
+        <div class="col s12"></div>
+        <?php endif ?>
         <?php endforeach ?>
     </div>
 </div>

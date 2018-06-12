@@ -19,7 +19,7 @@
                     <td><?= $copy->book->title ?></td>
                     <td><?= $copy->book->author ?></td>
                     <td><?= (new DateTime($copy->copy_date))->format('d M Y h:m A') ?></td>
-                    <td><?= $copy->status ? 'On shelf' : 'Borrowed' ?></td>
+                    <td><?= $copy->status == '1' || $copy->status == 't' ? 'On shelf' : 'Borrowed' ?></td>
                 </tr>
                 <?php endforeach ?>
             </tbody>

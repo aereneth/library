@@ -1,20 +1,22 @@
-<nav class="blue" role="navigation">
-    <div class="nav-wrapper">
-        <a id="logo-container" href="#" class="brand-logo">adInfinitum</a>
-        <ul class="right hide-on-med-and-down">
-            <?php if($user->privilege == 3): ?>
-            <li><a href="<?= base_url('cart') ?>"><i class="material-icons left">shopping_cart</i>Cart</a></li>
-            <?php endif ?>
-            <li>
-                <a href="#" class="dropdown-trigger" data-target="userDropdown"><?= "{$user->first_name} {$user->last_name}" ?></a>
-                <ul id="userDropdown" class="dropdown-content">
-                    <li><a href="<?= base_url('/logout') ?>"><i class="material-icons">exit_to_app</i>Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-        <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="white-text material-icons">menu</i></a>
-    </div>
-</nav>
+<div class="navbar-fixed">
+    <nav class="blue" role="navigation">
+        <div class="nav-wrapper">
+            <a id="logo-container" href="#" class="brand-logo">adInfinitum</a>
+            <ul class="right hide-on-med-and-down">
+                <?php if($user->privilege == 3): ?>
+                <li><a href="<?= base_url('cart') ?>"><i class="material-icons left">shopping_cart</i>Cart</a></li>
+                <?php endif ?>
+                <li>
+                    <a href="#" class="dropdown-trigger" data-target="userDropdown"><?= "{$user->first_name} {$user->last_name}" ?></a>
+                    <ul id="userDropdown" class="dropdown-content">
+                        <li><a href="<?= base_url('/logout') ?>"><i class="material-icons">exit_to_app</i>Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="white-text material-icons">menu</i></a>
+        </div>
+    </nav>
+</div>
 
  <ul id="slide-out" class="sidenav">
     <li>
